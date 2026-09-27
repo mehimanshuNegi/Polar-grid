@@ -3,7 +3,7 @@
   "provider": "Open-Meteo ECMWF Numerical Weather Prediction",
   "mode": "live",
   "is_live": true,
-  "updated_at": "27 Sep 2026, 14:25 UTC",
+  "updated_at": "27 Sep 2026, 14:47 UTC",
   "latitude": -67.6027,
   "longitude": 62.8738,
   "forecast_hours": 96,
