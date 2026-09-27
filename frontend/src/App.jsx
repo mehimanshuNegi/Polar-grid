@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import HowItWorksPage from './pages/HowItWorksPage';
@@ -145,18 +145,32 @@ export default function App() {
   };
 
   // 3. Fetch Results Simulation Data (Changes with simSeason or simHorizon)
+  const resultsCacheRef = useRef({});
+  const activeReqRef = useRef(null);
+
   const fetchResultsData = async (s, h) => {
+    const key = `${s}_${h}`;
+    if (resultsCacheRef.current[key]) {
+      setResultsData(resultsCacheRef.current[key]);
+      return;
+    }
     setLoadingResults(true);
+    activeReqRef.current = key;
     try {
       const res = await fetch(`/api/schedule?horizon=${h}&season=${s}`).catch(() => null);
       if (res && res.ok) {
         const data = await res.json();
-        setResultsData(data);
+        resultsCacheRef.current[key] = data;
+        if (activeReqRef.current === key) {
+          setResultsData(data);
+        }
       }
     } catch (err) {
       console.warn("Results simulation fetch issue:", err);
     } finally {
-      setLoadingResults(false);
+      if (activeReqRef.current === key) {
+        setLoadingResults(false);
+      }
     }
   };
 
