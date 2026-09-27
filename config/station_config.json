@@ -1,0 +1,52 @@
+{
+  "station": {
+    "name": "Mawson Station",
+    "country": "Australia (AAD)",
+    "coordinates": {
+      "latitude": -67.6027,
+      "longitude": 62.8738
+    },
+    "description": "Australian Antarctic research station in Mac. Robertson Land",
+    "base_scientific_load_kw": 120.0,
+    "heating_degree_coefficient_kw_per_deg": 3.2,
+    "indoor_setpoint_celsius": 18.0
+  },
+  "solar_pv": {
+    "capacity_kw": 100.0,
+    "reference_irradiance_w_per_m2": 1000.0,
+    "temperature_coefficient_p_deg_c": -0.0038,
+    "inverter_efficiency": 0.95
+  },
+  "wind_turbines": {
+    "turbine_count": 2,
+    "capacity_per_turbine_kw": 100.0,
+    "total_capacity_kw": 200.0,
+    "cut_in_speed_m_s": 3.5,
+    "rated_speed_m_s": 12.0,
+    "cut_out_speed_m_s": 25.0
+  },
+  "battery_storage": {
+    "capacity_kwh": 300.0,
+    "max_charge_power_kw": 100.0,
+    "max_discharge_power_kw": 100.0,
+    "charge_efficiency": 0.9487,
+    "discharge_efficiency": 0.9487,
+    "min_soc": 0.20,
+    "max_soc": 0.95,
+    "initial_soc": 0.50
+  },
+  "diesel_generator": {
+    "generator_count": 3,
+    "capacity_per_generator_kw": 125.0,
+    "total_capacity_kw": 375.0,
+    "min_load_ratio": 0.30,
+    "fuel_curve_a_l_per_kwh": 0.24,
+    "fuel_curve_b_l_per_kw_rated": 0.04
+  },
+  "dispatch_weights": {
+    "diesel_fuel_penalty": 1.0,
+    "unmet_demand_penalty": 1000.0,
+    "curtailment_penalty": 0.01,
+    "battery_cycling_penalty": 0.005
+  }
+}

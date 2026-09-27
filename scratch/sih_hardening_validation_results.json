@@ -1,0 +1,116 @@
+{
+  "api_endpoints": {
+    "/api/status": "PASSED",
+    "/api/config": "PASSED",
+    "/api/metrics": "PASSED"
+  },
+  "scenarios": {
+    "summer_24h": {
+      "horizon": 24,
+      "season": "summer",
+      "solar_gen_kwh": 699.43,
+      "wind_gen_kwh": 4289.87,
+      "diesel_gen_kwh": 0.0,
+      "min_soc_pct": 48.19,
+      "max_soc_pct": 95.0,
+      "diesel_reduction_pct": 100.0,
+      "baseline_fuel_litres": 1228.64,
+      "optimized_fuel_litres": 0.0,
+      "unmet_load_kwh": 0.0,
+      "max_power_balance_diff_kw": 0.0
+    },
+    "summer_48h": {
+      "horizon": 48,
+      "season": "summer",
+      "solar_gen_kwh": 1509.46,
+      "wind_gen_kwh": 6232.0,
+      "diesel_gen_kwh": 970.3,
+      "min_soc_pct": 20.0,
+      "max_soc_pct": 95.0,
+      "diesel_reduction_pct": 78.57,
+      "baseline_fuel_litres": 2486.06,
+      "optimized_fuel_litres": 532.88,
+      "unmet_load_kwh": 0.0,
+      "max_power_balance_diff_kw": 0.0
+    },
+    "summer_72h": {
+      "horizon": 72,
+      "season": "summer",
+      "solar_gen_kwh": 2415.91,
+      "wind_gen_kwh": 7476.45,
+      "diesel_gen_kwh": 2620.17,
+      "min_soc_pct": 20.0,
+      "max_soc_pct": 95.0,
+      "diesel_reduction_pct": 65.71,
+      "baseline_fuel_litres": 3758.25,
+      "optimized_fuel_litres": 1288.88,
+      "unmet_load_kwh": 0.0,
+      "max_power_balance_diff_kw": 0.0
+    },
+    "winter_24h": {
+      "horizon": 24,
+      "season": "winter",
+      "solar_gen_kwh": 0.0,
+      "wind_gen_kwh": 180.71,
+      "diesel_gen_kwh": 5514.81,
+      "min_soc_pct": 20.0,
+      "max_soc_pct": 20.0,
+      "diesel_reduction_pct": 3.65,
+      "baseline_fuel_litres": 1747.42,
+      "optimized_fuel_litres": 1683.56,
+      "unmet_load_kwh": 0.0,
+      "max_power_balance_diff_kw": 0.0
+    },
+    "winter_48h": {
+      "horizon": 48,
+      "season": "winter",
+      "solar_gen_kwh": 0.0,
+      "wind_gen_kwh": 3096.82,
+      "diesel_gen_kwh": 7820.47,
+      "min_soc_pct": 20.0,
+      "max_soc_pct": 52.29,
+      "diesel_reduction_pct": 25.75,
+      "baseline_fuel_litres": 3336.14,
+      "optimized_fuel_litres": 2476.93,
+      "unmet_load_kwh": 0.0,
+      "max_power_balance_diff_kw": 0.0
+    },
+    "winter_72h": {
+      "horizon": 72,
+      "season": "winter",
+      "solar_gen_kwh": 0.0,
+      "wind_gen_kwh": 3896.82,
+      "diesel_gen_kwh": 11282.87,
+      "min_soc_pct": 20.0,
+      "max_soc_pct": 75.01,
+      "diesel_reduction_pct": 23.87,
+      "baseline_fuel_litres": 4739.27,
+      "optimized_fuel_litres": 3607.89,
+      "unmet_load_kwh": 0.0,
+      "max_power_balance_diff_kw": 0.0
+    }
+  },
+  "optimization_checks": {},
+  "ml_metrics": {
+    "modeled_demand_kw": {
+      "MAE": 1.25,
+      "RMSE": 2.031,
+      "R2": 0.9791
+    },
+    "solar_radiation_wm2": {
+      "MAE": 17.306,
+      "RMSE": 25.932,
+      "R2": 0.9921
+    },
+    "wind_speed_ms": {
+      "MAE": 0.603,
+      "RMSE": 0.85,
+      "R2": 0.9668
+    },
+    "temperature_celsius": {
+      "MAE": 0.377,
+      "RMSE": 0.61,
+      "R2": 0.9795
+    }
+  }
+}

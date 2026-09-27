@@ -1,0 +1,155 @@
+{
+  "validation_architecture": "Strict Chronological Split (No Shuffling)",
+  "training_period": {
+    "start": "2023-01-02 00:00:00",
+    "end": "2023-10-20 03:00:00",
+    "samples": 6988,
+    "ratio": 0.8
+  },
+  "testing_period": {
+    "start": "2023-10-20 04:00:00",
+    "end": "2023-12-31 23:00:00",
+    "samples": 1748,
+    "ratio": 0.2,
+    "unseen": true
+  },
+  "leakage_audit": {
+    "future_data_leakage": false,
+    "shuffled": false,
+    "lags_look_backward_only": true
+  },
+  "ml_vs_baseline": {
+    "modeled_demand_kw": {
+      "baseline_mae": 1.605,
+      "baseline_rmse": 2.245,
+      "baseline_r2": 0.9745,
+      "ml_mae": 1.25,
+      "ml_rmse": 2.031,
+      "ml_r2": 0.9791,
+      "improvement_percent": 22.14,
+      "beats_baseline": true
+    },
+    "solar_radiation_wm2": {
+      "baseline_mae": 63.902,
+      "baseline_rmse": 77.615,
+      "baseline_r2": 0.929,
+      "ml_mae": 17.306,
+      "ml_rmse": 25.932,
+      "ml_r2": 0.9921,
+      "improvement_percent": 72.92,
+      "beats_baseline": true
+    },
+    "wind_speed_ms": {
+      "baseline_mae": 0.62,
+      "baseline_rmse": 0.884,
+      "baseline_r2": 0.9641,
+      "ml_mae": 0.603,
+      "ml_rmse": 0.85,
+      "ml_r2": 0.9668,
+      "improvement_percent": 2.72,
+      "beats_baseline": true
+    },
+    "temperature_celsius": {
+      "baseline_mae": 0.465,
+      "baseline_rmse": 0.698,
+      "baseline_r2": 0.9732,
+      "ml_mae": 0.377,
+      "ml_rmse": 0.61,
+      "ml_r2": 0.9795,
+      "improvement_percent": 18.9,
+      "beats_baseline": true
+    }
+  },
+  "multi_horizon_evaluation": {
+    "24h": {
+      "modeled_demand_kw": {
+        "mae": 1.317,
+        "rmse": 1.612,
+        "r2": 0.9236,
+        "baseline_mae": 11.608,
+        "improvement_percent": 88.66
+      },
+      "solar_radiation_wm2": {
+        "mae": 8.708,
+        "rmse": 12.428,
+        "r2": 0.9973,
+        "baseline_mae": 238.417,
+        "improvement_percent": 96.35
+      },
+      "wind_speed_ms": {
+        "mae": 0.437,
+        "rmse": 0.524,
+        "r2": 0.8566,
+        "baseline_mae": 1.391,
+        "improvement_percent": 68.55
+      },
+      "temperature_celsius": {
+        "mae": 0.348,
+        "rmse": 0.424,
+        "r2": 0.9695,
+        "baseline_mae": 2.592,
+        "improvement_percent": 86.58
+      }
+    },
+    "48h": {
+      "modeled_demand_kw": {
+        "mae": 1.097,
+        "rmse": 1.403,
+        "r2": 0.9574,
+        "baseline_mae": 14.44,
+        "improvement_percent": 92.4
+      },
+      "solar_radiation_wm2": {
+        "mae": 6.81,
+        "rmse": 10.518,
+        "r2": 0.9982,
+        "baseline_mae": 244.458,
+        "improvement_percent": 97.21
+      },
+      "wind_speed_ms": {
+        "mae": 0.476,
+        "rmse": 0.58,
+        "r2": 0.8617,
+        "baseline_mae": 1.565,
+        "improvement_percent": 69.56
+      },
+      "temperature_celsius": {
+        "mae": 0.314,
+        "rmse": 0.387,
+        "r2": 0.9708,
+        "baseline_mae": 3.096,
+        "improvement_percent": 89.87
+      }
+    },
+    "72h": {
+      "modeled_demand_kw": {
+        "mae": 0.967,
+        "rmse": 1.252,
+        "r2": 0.9754,
+        "baseline_mae": 13.115,
+        "improvement_percent": 92.63
+      },
+      "solar_radiation_wm2": {
+        "mae": 8.336,
+        "rmse": 13.177,
+        "r2": 0.9971,
+        "baseline_mae": 244.708,
+        "improvement_percent": 96.59
+      },
+      "wind_speed_ms": {
+        "mae": 0.548,
+        "rmse": 0.675,
+        "r2": 0.9659,
+        "baseline_mae": 3.521,
+        "improvement_percent": 84.42
+      },
+      "temperature_celsius": {
+        "mae": 0.263,
+        "rmse": 0.337,
+        "r2": 0.9735,
+        "baseline_mae": 2.408,
+        "improvement_percent": 89.07
+      }
+    }
+  }
+}

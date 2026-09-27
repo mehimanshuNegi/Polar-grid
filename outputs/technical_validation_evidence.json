@@ -1,0 +1,490 @@
+{
+  "phase_1_data_validation": {
+    "raw_zip_exists": true,
+    "raw_zip_size_bytes": 38868,
+    "ind59_total_rows": 1432,
+    "ind59_places": [
+      "Mawson",
+      "Davis",
+      "Casey",
+      "Macquarie Island"
+    ],
+    "ind59_mawson_rows": 360,
+    "ind59_date_min": "1986-01-01",
+    "ind59_date_max": "2016-02-01",
+    "ind59_null_count": 8,
+    "ind59_mean_monthly_kwh": 134710.49,
+    "ind59_min_monthly_kwh": 15005.0,
+    "ind59_max_monthly_kwh": 223804.0,
+    "ind56_mawson_rows": 278,
+    "ind56_mean_monthly_fuel_litres": 42214.93,
+    "era5_file_exists": true,
+    "era5_rows": 8760,
+    "era5_cols": [
+      "timestamp",
+      "temperature_celsius",
+      "wind_speed_ms",
+      "wind_direction_deg",
+      "solar_radiation_wm2",
+      "direct_radiation_wm2",
+      "diffuse_radiation_wm2"
+    ],
+    "era5_null_counts": {
+      "timestamp": 0,
+      "temperature_celsius": 0,
+      "wind_speed_ms": 0,
+      "wind_direction_deg": 0,
+      "solar_radiation_wm2": 0,
+      "direct_radiation_wm2": 0,
+      "diffuse_radiation_wm2": 0
+    },
+    "era5_temp_min": -36.4,
+    "era5_temp_max": 2.1,
+    "era5_wind_min": 0.0,
+    "era5_wind_max": 28.67,
+    "era5_solar_max": 887.0,
+    "proc_file_exists": true,
+    "proc_rows": 8760,
+    "proc_cols": [
+      "timestamp",
+      "temperature_celsius",
+      "wind_speed_ms",
+      "wind_direction_deg",
+      "solar_radiation_wm2",
+      "direct_radiation_wm2",
+      "diffuse_radiation_wm2",
+      "modeled_demand_kw",
+      "demand_data_type"
+    ],
+    "proc_null_counts": {
+      "timestamp": 0,
+      "temperature_celsius": 0,
+      "wind_speed_ms": 0,
+      "wind_direction_deg": 0,
+      "solar_radiation_wm2": 0,
+      "direct_radiation_wm2": 0,
+      "diffuse_radiation_wm2": 0,
+      "modeled_demand_kw": 0,
+      "demand_data_type": 0
+    },
+    "proc_demand_min": 128.25,
+    "proc_demand_max": 246.47,
+    "proc_demand_mean": 185.74,
+    "classifications": {
+      "indicator_59.csv (AADC Monthly Electricity)": "REAL (AADC Station Telemetry)",
+      "indicator_56.csv (AADC Monthly Generator Fuel)": "REAL (AADC Station Telemetry)",
+      "mawson_era5_hourly_2023.csv": "REANALYSIS (ECMWF ERA5 via Open-Meteo Historical Archive)",
+      "modeled_demand_kw": "MODELED (Derived physically and calibrated to monthly AADC mean)"
+    }
+  },
+  "phase_2_load_validation": {
+    "monthly_modeled_sums_kwh": {
+      "1": 115357.5,
+      "2": 109544.5,
+      "3": 133167.1,
+      "4": 132181.2,
+      "5": 153413.6,
+      "6": 141861.0,
+      "7": 158389.6,
+      "8": 162583.1,
+      "9": 138279.6,
+      "10": 142317.5,
+      "11": 124520.3,
+      "12": 115461.1
+    },
+    "annual_modeled_kwh": 1627076.2,
+    "modeled_avg_monthly_kwh": 135589.7,
+    "real_avg_monthly_kwh": 134710.49,
+    "mean_calibration_error_kwh": 879.2,
+    "mean_calibration_error_percent": 0.653,
+    "no_negative_load": true,
+    "min_load_kw": 128.25,
+    "max_load_kw": 246.47,
+    "jan_mean_kw": 155.05,
+    "jul_mean_kw": 212.89,
+    "winter_heating_surge_percent": 37.3
+  },
+  "phase_3_weather_validation": {
+    "is_live_weather": false,
+    "weather_data_source": "Historical ECMWF ERA5 Reanalysis (Jan 1 2023 - Dec 31 2023)",
+    "explicit_statement": "CURRENT SYSTEM DOES NOT PROVIDE LIVE WEATHER. It uses genuine historical ERA5 reanalysis data.",
+    "hourly_timesteps_count": 8760,
+    "expected_timesteps": 8760,
+    "complete_year_check": true,
+    "temp_range_reasonable": true,
+    "wind_range_reasonable": true,
+    "solar_range_reasonable": true
+  },
+  "phase_4_feature_validation": {
+    "input_rows": 8760,
+    "features_rows": 8736,
+    "dropped_rows_for_lags": 24,
+    "feature_count": 36,
+    "feature_list": [
+      "timestamp",
+      "temperature_celsius",
+      "wind_speed_ms",
+      "wind_direction_deg",
+      "solar_radiation_wm2",
+      "direct_radiation_wm2",
+      "diffuse_radiation_wm2",
+      "modeled_demand_kw",
+      "demand_data_type",
+      "hour",
+      "day_of_year",
+      "month",
+      "sin_hour",
+      "cos_hour",
+      "sin_doy",
+      "cos_doy",
+      "temperature_celsius_lag1",
+      "temperature_celsius_lag2",
+      "temperature_celsius_lag24",
+      "temperature_celsius_roll6_mean",
+      "temperature_celsius_roll24_mean",
+      "wind_speed_ms_lag1",
+      "wind_speed_ms_lag2",
+      "wind_speed_ms_lag24",
+      "wind_speed_ms_roll6_mean",
+      "wind_speed_ms_roll24_mean",
+      "solar_radiation_wm2_lag1",
+      "solar_radiation_wm2_lag2",
+      "solar_radiation_wm2_lag24",
+      "solar_radiation_wm2_roll6_mean",
+      "solar_radiation_wm2_roll24_mean",
+      "modeled_demand_kw_lag1",
+      "modeled_demand_kw_lag2",
+      "modeled_demand_kw_lag24",
+      "modeled_demand_kw_roll6_mean",
+      "modeled_demand_kw_roll24_mean"
+    ],
+    "lags_shift_backward": true,
+    "rolling_mean_shifts_backward": true,
+    "is_chronological": true
+  },
+  "phase_5_ml_validation": {
+    "model_type": "HistGradientBoostingRegressor (scikit-learn)",
+    "train_ratio": 0.8,
+    "train_size": 6988,
+    "test_size": 1748,
+    "calculated_metrics": {
+      "modeled_demand_kw": {
+        "MAE": 1.25,
+        "RMSE": 2.031,
+        "R2": 0.9791,
+        "pass": true
+      },
+      "solar_radiation_wm2": {
+        "MAE": 17.306,
+        "RMSE": 25.932,
+        "R2": 0.9921,
+        "pass": true
+      },
+      "wind_speed_ms": {
+        "MAE": 0.603,
+        "RMSE": 0.85,
+        "R2": 0.9668,
+        "pass": true
+      },
+      "temperature_celsius": {
+        "MAE": 0.377,
+        "RMSE": 0.61,
+        "R2": 0.9795,
+        "pass": true
+      }
+    },
+    "saved_audit_metrics": {
+      "modeled_demand_kw": {
+        "MAE": 1.25,
+        "RMSE": 2.031,
+        "R2": 0.9791
+      },
+      "solar_radiation_wm2": {
+        "MAE": 17.306,
+        "RMSE": 25.932,
+        "R2": 0.9921
+      },
+      "wind_speed_ms": {
+        "MAE": 0.603,
+        "RMSE": 0.85,
+        "R2": 0.9668
+      },
+      "temperature_celsius": {
+        "MAE": 0.377,
+        "RMSE": 0.61,
+        "R2": 0.9795
+      }
+    }
+  },
+  "phase_6_renewable_validation": {
+    "solar_tests": [
+      {
+        "G": 0.0,
+        "T": -15.0,
+        "output_kw": 0.0,
+        "max_capacity_kw": 100.0,
+        "within_bounds": true
+      },
+      {
+        "G": 0.0,
+        "T": 0.0,
+        "output_kw": 0.0,
+        "max_capacity_kw": 100.0,
+        "within_bounds": true
+      },
+      {
+        "G": 1000.0,
+        "T": 25.0,
+        "output_kw": 84.17,
+        "max_capacity_kw": 100.0,
+        "within_bounds": true
+      },
+      {
+        "G": 1000.0,
+        "T": -20.0,
+        "output_kw": 100.0,
+        "max_capacity_kw": 100.0,
+        "within_bounds": true
+      },
+      {
+        "G": 1400.0,
+        "T": -20.0,
+        "output_kw": 100.0,
+        "max_capacity_kw": 100.0,
+        "within_bounds": true
+      }
+    ],
+    "wind_tests": [
+      {
+        "wind_speed_ms": 0.0,
+        "power_kw": 0.0,
+        "expected_behavior": "0 (Below cut-in)",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 2.0,
+        "power_kw": 0.0,
+        "expected_behavior": "0 (Below cut-in)",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 3.49,
+        "power_kw": 0.0,
+        "expected_behavior": "0 (Below cut-in)",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 3.5,
+        "power_kw": 0.0,
+        "expected_behavior": "Ramping",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 5.0,
+        "power_kw": 9.75,
+        "expected_behavior": "Ramping",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 8.0,
+        "power_kw": 55.68,
+        "expected_behavior": "Ramping",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 11.99,
+        "power_kw": 199.49,
+        "expected_behavior": "Ramping",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 12.0,
+        "power_kw": 200.0,
+        "expected_behavior": "200 (Rated)",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 15.0,
+        "power_kw": 200.0,
+        "expected_behavior": "200 (Rated)",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 20.0,
+        "power_kw": 200.0,
+        "expected_behavior": "200 (Rated)",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 25.0,
+        "power_kw": 200.0,
+        "expected_behavior": "200 (Rated)",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 25.01,
+        "power_kw": 0.0,
+        "expected_behavior": "0 (Cut-out trip)",
+        "correct": true
+      },
+      {
+        "wind_speed_ms": 30.0,
+        "power_kw": 0.0,
+        "expected_behavior": "0 (Cut-out trip)",
+        "correct": true
+      }
+    ]
+  },
+  "phase_7_8_battery_and_optimization": {
+    "simulation_results": {
+      "summer_24h": {
+        "horizon": 24,
+        "season": "summer",
+        "max_power_balance_error_kw": 58.88,
+        "max_renewable_balance_error_kw": 0.0,
+        "min_soc_percent": 49.75,
+        "max_soc_percent": 95.0,
+        "soc_within_20_95": true,
+        "max_charge_power_kw": 58.88,
+        "charge_power_within_100kw": true,
+        "max_discharge_power_kw": 0.7,
+        "discharge_power_within_100kw": true,
+        "min_diesel_kw": 0.0,
+        "max_diesel_kw": 0.0,
+        "diesel_within_375kw": true,
+        "total_unmet_kwh": 0.0,
+        "baseline_fuel_litres": 1229.27,
+        "optimized_fuel_litres": 0.0,
+        "fuel_saved_litres": 1229.27,
+        "diesel_reduction_percent": 100.0,
+        "renewable_penetration_percent": 103.93,
+        "pass_all_constraints": false
+      },
+      "summer_48h": {
+        "horizon": 48,
+        "season": "summer",
+        "max_power_balance_error_kw": 58.88,
+        "max_renewable_balance_error_kw": 0.0,
+        "min_soc_percent": 20.0,
+        "max_soc_percent": 95.0,
+        "soc_within_20_95": true,
+        "max_charge_power_kw": 58.88,
+        "charge_power_within_100kw": true,
+        "max_discharge_power_kw": 69.63,
+        "discharge_power_within_100kw": true,
+        "min_diesel_kw": 0.0,
+        "max_diesel_kw": 90.91,
+        "diesel_within_375kw": true,
+        "total_unmet_kwh": 0.0,
+        "baseline_fuel_litres": 2487.49,
+        "optimized_fuel_litres": 524.34,
+        "fuel_saved_litres": 1963.15,
+        "diesel_reduction_percent": 78.92,
+        "renewable_penetration_percent": 89.37,
+        "pass_all_constraints": false
+      },
+      "summer_72h": {
+        "horizon": 72,
+        "season": "summer",
+        "max_power_balance_error_kw": 58.88,
+        "max_renewable_balance_error_kw": 0.0,
+        "min_soc_percent": 20.0,
+        "max_soc_percent": 95.0,
+        "soc_within_20_95": true,
+        "max_charge_power_kw": 58.88,
+        "charge_power_within_100kw": true,
+        "max_discharge_power_kw": 68.05,
+        "discharge_power_within_100kw": true,
+        "min_diesel_kw": 0.0,
+        "max_diesel_kw": 104.27,
+        "diesel_within_375kw": true,
+        "total_unmet_kwh": 0.0,
+        "baseline_fuel_litres": 3759.96,
+        "optimized_fuel_litres": 1269.31,
+        "fuel_saved_litres": 2490.65,
+        "diesel_reduction_percent": 66.24,
+        "renewable_penetration_percent": 78.62,
+        "pass_all_constraints": false
+      },
+      "winter_24h": {
+        "horizon": 24,
+        "season": "winter",
+        "max_power_balance_error_kw": 0.0,
+        "max_renewable_balance_error_kw": 0.0,
+        "min_soc_percent": 20.0,
+        "max_soc_percent": 20.0,
+        "soc_within_20_95": true,
+        "max_charge_power_kw": 0.0,
+        "charge_power_within_100kw": true,
+        "max_discharge_power_kw": 85.38,
+        "discharge_power_within_100kw": true,
+        "min_diesel_kw": 141.68,
+        "max_diesel_kw": 243.05,
+        "diesel_within_375kw": true,
+        "total_unmet_kwh": 0.0,
+        "baseline_fuel_litres": 1747.17,
+        "optimized_fuel_litres": 1684.59,
+        "fuel_saved_litres": 62.58,
+        "diesel_reduction_percent": 3.58,
+        "renewable_penetration_percent": 3.03,
+        "pass_all_constraints": true
+      },
+      "winter_48h": {
+        "horizon": 48,
+        "season": "winter",
+        "max_power_balance_error_kw": 22.84,
+        "max_renewable_balance_error_kw": 0.0,
+        "min_soc_percent": 20.0,
+        "max_soc_percent": 52.39,
+        "soc_within_20_95": true,
+        "max_charge_power_kw": 22.84,
+        "charge_power_within_100kw": true,
+        "max_discharge_power_kw": 85.38,
+        "discharge_power_within_100kw": true,
+        "min_diesel_kw": 0.0,
+        "max_diesel_kw": 243.05,
+        "diesel_within_375kw": true,
+        "total_unmet_kwh": 0.0,
+        "baseline_fuel_litres": 3336.07,
+        "optimized_fuel_litres": 2476.68,
+        "fuel_saved_litres": 859.39,
+        "diesel_reduction_percent": 25.76,
+        "renewable_penetration_percent": 28.42,
+        "pass_all_constraints": false
+      },
+      "winter_72h": {
+        "horizon": 72,
+        "season": "winter",
+        "max_power_balance_error_kw": 24.53,
+        "max_renewable_balance_error_kw": 0.0,
+        "min_soc_percent": 20.0,
+        "max_soc_percent": 75.33,
+        "soc_within_20_95": true,
+        "max_charge_power_kw": 24.53,
+        "charge_power_within_100kw": true,
+        "max_discharge_power_kw": 100.0,
+        "discharge_power_within_100kw": true,
+        "min_diesel_kw": 0.0,
+        "max_diesel_kw": 243.05,
+        "diesel_within_375kw": true,
+        "total_unmet_kwh": 0.0,
+        "baseline_fuel_litres": 4739.14,
+        "optimized_fuel_litres": 3607.53,
+        "fuel_saved_litres": 1131.61,
+        "diesel_reduction_percent": 23.88,
+        "renewable_penetration_percent": 25.57,
+        "pass_all_constraints": false
+      }
+    }
+  },
+  "phase_9_annual_baseline_audit": {
+    "total_simulated_hours": 8736,
+    "annual_total_demand_kwh": 1623582.43,
+    "annual_baseline_diesel_fuel_litres": 520699.78,
+    "annual_optimized_diesel_fuel_litres": 304864.8,
+    "annual_diesel_fuel_saved_litres": 215834.98,
+    "annual_diesel_reduction_percent": 41.45,
+    "annual_renewable_penetration_percent": 46.96,
+    "claim_38_45_percent_supported": true
+  }
+}

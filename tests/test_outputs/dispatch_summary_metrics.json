@@ -1,0 +1,14 @@
+{
+  "time_horizon_hours": 12,
+  "total_demand_kwh": 1800.0,
+  "renewable_energy_used_kwh": 600.0,
+  "diesel_energy_used_kwh": 1200.0,
+  "battery_discharge_kwh": 0.0,
+  "battery_charge_kwh": 0.0,
+  "unmet_demand_kwh": 0.0,
+  "renewable_penetration_percent": 33.33,
+  "baseline_diesel_fuel_litres": 612.0,
+  "optimized_diesel_fuel_litres": 468.0,
+  "diesel_fuel_saved_litres": 144.0,
+  "diesel_reduction_percent": 23.53
+}
