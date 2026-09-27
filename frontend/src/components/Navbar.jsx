@@ -20,9 +20,9 @@ export default function Navbar({ currentPage, setCurrentPage, weatherMetadata })
 
   const isLive = Boolean(weatherMetadata?.is_live);
   const isCached = weatherMetadata?.mode === 'cached' || weatherMetadata?.source?.includes('Cached');
-  const weatherLabel = isLive ? 'ECMWF IFS' : (isCached ? 'CACHED WEATHER' : 'HISTORICAL');
-  const timestampPrefix = isLive ? 'Updated: ' : (isCached ? 'Cache updated: ' : 'Archive: ');
-  const updateTimestamp = weatherMetadata?.updated_at || 'Checking feed...';
+  const weatherLabel = isLive ? 'LIVE ECMWF IFS' : (isCached ? 'CACHED WEATHER' : 'HISTORICAL FALLBACK');
+  const timestampPrefix = isLive ? 'Fetched: ' : (isCached ? 'Last live fetch: ' : 'Archive: ');
+  const updateTimestamp = weatherMetadata?.fetched_at || weatherMetadata?.updated_at || 'Checking feed...';
 
   return (
     <header className="site-navbar">
@@ -61,9 +61,9 @@ export default function Navbar({ currentPage, setCurrentPage, weatherMetadata })
 
         {/* Status & Live Weather Console Widget */}
         <div className="navbar-status-area">
-          <div className={`nav-weather-badge ${isLive ? 'is-live' : 'is-fallback'}`}>
-            <span className="status-dot"></span>
-            <span className="weather-headline">{isLive ? 'LIVE ECMWF IFS' : weatherLabel}</span>
+          <div className={`nav-weather-badge ${isLive ? 'is-live' : (isCached ? 'is-cached' : 'is-fallback')}`}>
+            <span className={`status-dot ${isLive ? '' : (isCached ? 'dot-amber' : 'dot-gray')}`}></span>
+            <span className="weather-headline">{weatherLabel}</span>
           </div>
           <span className="weather-time mono-text">{timestampPrefix}{updateTimestamp}</span>
         </div>
@@ -83,7 +83,7 @@ export default function Navbar({ currentPage, setCurrentPage, weatherMetadata })
         <div className="mobile-nav-drawer">
           <div className="mobile-coords-banner">
             <span>Mawson Station · 67.6027° S · 62.8738° E</span>
-            <span className="mobile-weather-pill">{isLive ? '● ECMWF LIVE' : '○ CACHED'}</span>
+            <span className="mobile-weather-pill">{isLive ? '● ECMWF LIVE' : (isCached ? '○ CACHED' : '○ HISTORICAL')}</span>
           </div>
           <div className="mobile-nav-items">
             {navItems.map((item) => {

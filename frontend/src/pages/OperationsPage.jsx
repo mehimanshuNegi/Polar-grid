@@ -235,9 +235,9 @@ export default function OperationsPage({
   // Weather metadata
   const isLive = Boolean(weatherMetadata?.is_live);
   const isCached = weatherMetadata?.mode === 'cached' || weatherMetadata?.source?.includes('Cached');
-  const weatherLabel = isLive ? 'LIVE ECMWF IFS' : (isCached ? 'CACHED WEATHER' : 'HISTORICAL');
-  const timestampPrefix = isLive ? 'Updated: ' : (isCached ? 'Cache updated: ' : 'Archive: ');
-  const updateTimestamp = weatherMetadata?.updated_at || 'Checking feed...';
+  const weatherLabel = isLive ? 'LIVE ECMWF IFS' : (isCached ? 'CACHED WEATHER' : 'HISTORICAL FALLBACK');
+  const timestampPrefix = isLive ? 'Fetched: ' : (isCached ? 'Last live fetch: ' : 'Archive: ');
+  const updateTimestamp = weatherMetadata?.fetched_at || weatherMetadata?.updated_at || 'Checking feed...';
 
   // Alerts list from simulated equipment state
   const alerts = operationsSummary?.alerts || [];
@@ -268,13 +268,25 @@ export default function OperationsPage({
               {dispatchNotice}
             </span>
           )}
-          <div className="ops-live-tag">
-            <span className="live-dot-teal"></span>
+          <div className={`ops-live-tag ${isLive ? 'is-live' : (isCached ? 'is-cached' : 'is-fallback')}`}>
+            <span className={isLive ? "live-dot-teal" : (isCached ? "live-dot-amber" : "live-dot-gray")}></span>
             <span className="live-tag-text">{weatherLabel}</span>
           </div>
-          <span className="ops-update-time mono-text">
-            {timestampPrefix}{updateTimestamp}
-          </span>
+          <div className="ops-provenance-lines">
+            <span className="ops-update-time mono-text">
+              {timestampPrefix}{updateTimestamp}
+            </span>
+            {isLive && weatherMetadata?.forecast_updated_at && (
+              <span className="ops-model-run mono-text" style={{ fontSize: '10.5px', color: 'var(--text-muted)' }}>
+                Forecast update: {weatherMetadata.forecast_updated_at}
+              </span>
+            )}
+            {isCached && weatherMetadata?.fallback_reason && (
+              <span className="ops-fallback-reason mono-text" style={{ fontSize: '10.5px', color: 'var(--color-warning)' }}>
+                Reason: {weatherMetadata.fallback_reason.includes('429') ? 'Provider rate limited (HTTP 429)' : weatherMetadata.fallback_reason}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 

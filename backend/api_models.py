@@ -93,11 +93,41 @@ class LiveWeatherResponse(BaseModel):
     mode: str
     is_live: bool
     updated_at: str
+    fetched_at: Optional[str] = None
+    forecast_updated_at: Optional[str] = None
+    cache_age_seconds: Optional[int] = 0
     latitude: float
     longitude: float
     forecast_hours: int
     points: List[WeatherPoint]
     fallback_reason: Optional[str] = None
+
+class WeatherStatusResponse(BaseModel):
+    provider: str
+    mode: str
+    is_live: bool
+    last_successful_fetch: Optional[str] = None
+    last_live_fetch_at: Optional[str] = None
+    forecast_updated_at: Optional[str] = None
+    snapshot_age_seconds: Optional[int] = None
+    cache_age_seconds: Optional[int] = None
+    refresh_interval_seconds: int = 900
+    cache_ttl_seconds: int = 900
+    cache_present: bool = True
+    provider_cooldown_active: bool = False
+    provider_cooldown_remaining_seconds: int = 0
+    last_provider_error: Optional[str] = None
+    last_provider_status_code: Optional[int] = 200
+    refresh_in_progress: bool = False
+
+class WeatherRefreshResponse(BaseModel):
+    success: bool
+    source: str
+    mode: str
+    is_live: bool
+    fetched_at: Optional[str] = None
+    forecast_updated_at: Optional[str] = None
+    error: Optional[str] = None
 
 class DispatchRunRequest(BaseModel):
     horizon_hours: Optional[int] = 24

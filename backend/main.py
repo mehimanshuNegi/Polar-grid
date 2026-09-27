@@ -9,9 +9,10 @@ import os
 import sys
 import json
 from typing import Optional, List, Dict, Any
+from contextlib import asynccontextmanager
 import pandas as pd
 import numpy as np
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Header, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -22,19 +23,34 @@ if PROJECT_ROOT not in sys.path:
 from backend.api_models import (
     DispatchRunRequest,
     DispatchSummaryMetrics,
-    LiveWeatherResponse
+    LiveWeatherResponse,
+    WeatherStatusResponse,
+    WeatherRefreshResponse
 )
 from src.features.feature_builder import FeatureBuilder
 from src.forecasting.forecaster import PolarForecaster
 from src.renewable.generation_estimator import RenewableEstimator
 from src.optimization.dispatcher import MicrogridOptimizer
 from src.evaluation.baseline_comparator import BaselineComparator
-from src.weather.live_weather import WeatherForecastService
+from src.weather.live_weather import (
+    WeatherForecastService,
+    start_background_weather_refresh,
+    stop_background_weather_refresh
+)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: Start background weather refresh daemon
+    start_background_weather_refresh()
+    yield
+    # Shutdown: Stop background daemon
+    stop_background_weather_refresh()
 
 app = FastAPI(
     title="Polar Grid API",
     description="AI-Assisted Renewable Energy Forecasting and Optimization for Antarctic Stations",
-    version="2.0.0"
+    version="2.0.0",
+    lifespan=lifespan
 )
 
 # Enable CORS for React frontend (Vite ports: 5173, 3000, 8000, etc.)
@@ -182,6 +198,73 @@ def get_live_weather(
     service = WeatherForecastService()
     payload = service.get_weather_forecast(force_fallback=force_fallback, horizon_hours=horizon)
     return payload
+
+@app.get("/api/weather/status", response_model=WeatherStatusResponse)
+def get_weather_status():
+    """
+    Diagnostic & health endpoint reporting current weather pipeline state,
+    provider cooldown status, cache age, and last provider response.
+    Never triggers external weather provider requests.
+    """
+    service = WeatherForecastService()
+    return service.get_pipeline_status()
+
+@app.post("/api/weather/refresh", response_model=WeatherRefreshResponse)
+def manual_weather_refresh(
+    admin_key: Optional[str] = Header(None, alias="X-Admin-Key"),
+    key: Optional[str] = Query(None)
+):
+    """
+    Triggers an immediate controlled weather refresh attempt.
+    Respects provider cooldown and request locks.
+    """
+    auth_key = admin_key or key
+    expected_key = os.environ.get("WEATHER_ADMIN_KEY") or os.environ.get("WEATHER_REFRESH_TOKEN")
+    allow_manual = os.environ.get("ALLOW_MANUAL_REFRESH", "true").lower() in ("true", "1", "yes")
+
+    if expected_key and auth_key != expected_key:
+        raise HTTPException(status_code=403, detail="Unauthorized: invalid admin key")
+    elif not expected_key and not allow_manual:
+        raise HTTPException(status_code=403, detail="Manual weather refresh is disabled in production")
+
+    service = WeatherForecastService()
+    success, payload = service.refresh_weather_snapshot(force=True, horizon_hours=24)
+    return {
+        "success": success,
+        "source": payload.get("source", "ECMWF IFS"),
+        "mode": payload.get("mode", "cached"),
+        "is_live": payload.get("is_live", False),
+        "fetched_at": payload.get("fetched_at"),
+        "forecast_updated_at": payload.get("forecast_updated_at"),
+        "error": payload.get("fallback_reason") if not success else None
+    }
+
+@app.post("/api/weather/sync")
+def sync_weather_snapshot(
+    payload: dict = Body(...),
+    admin_key: Optional[str] = Header(None, alias="X-Admin-Key"),
+    key: Optional[str] = Query(None)
+):
+    """
+    Ingests an authentic external ECMWF forecast pushed by an external runner or webhook.
+    """
+    auth_key = admin_key or key
+    expected_key = os.environ.get("WEATHER_ADMIN_KEY") or os.environ.get("WEATHER_SYNC_TOKEN")
+    if expected_key and auth_key != expected_key:
+        raise HTTPException(status_code=403, detail="Unauthorized: invalid sync token")
+
+    service = WeatherForecastService()
+    try:
+        ingested = service.ingest_synced_snapshot(payload)
+        return {
+            "success": True,
+            "message": "Weather snapshot ingested successfully",
+            "source": ingested["source"],
+            "points": len(ingested["points"]),
+            "fetched_at": ingested["fetched_at"]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Ingestion failed: {e}")
 
 @app.get("/api/validation")
 def get_validation_metrics(date: Optional[str] = Query(None, description="Optional date to retrieve daily comparison")):
@@ -377,9 +460,16 @@ def get_forecast(
         forecast_df = forecaster.generate_forecast(df_feat, horizon_hours=horizon, season=season)
         meta = {
             "source": "ERA5 Reanalysis (Historical Benchmark)",
+            "provider": "ECMWF ERA5 Historical Reanalysis",
             "mode": "historical",
             "is_live": False,
-            "updated_at": "Historical Benchmark (2023 Archive)"
+            "updated_at": "Historical Benchmark (2023 Archive)",
+            "fetched_at": "Historical Benchmark (2023 Archive)",
+            "forecast_updated_at": "Historical Benchmark (2023 Archive)",
+            "cache_age_seconds": None,
+            "fallback_reason": None,
+            "latitude": -67.6027,
+            "longitude": 62.8738
         }
         return {
             "horizon_hours": horizon,
@@ -449,9 +539,16 @@ def get_schedule(
         
         weather_meta = {
             "source": "ERA5 Reanalysis (Historical Benchmark)",
+            "provider": "ECMWF ERA5 Historical Reanalysis",
             "mode": "historical",
             "is_live": False,
-            "updated_at": "Historical Benchmark (2023 Archive)"
+            "updated_at": "Historical Benchmark (2023 Archive)",
+            "fetched_at": "Historical Benchmark (2023 Archive)",
+            "forecast_updated_at": "Historical Benchmark (2023 Archive)",
+            "cache_age_seconds": None,
+            "fallback_reason": None,
+            "latitude": -67.6027,
+            "longitude": 62.8738
         }
         sim_label = "Austral Summer (24-Hour Sun)" if season.lower() == "summer" else "Polar Night (Sun Below Horizon)"
 
@@ -592,9 +689,16 @@ def run_dispatch(req: DispatchRunRequest):
         df_ren = ren_estimator.process_forecast_dataframe(df_forecast)
         weather_meta = {
             "source": "ERA5 Reanalysis (Historical Benchmark)",
+            "provider": "ECMWF ERA5 Historical Reanalysis",
             "mode": "historical",
             "is_live": False,
-            "updated_at": "Historical Benchmark (2023 Archive)"
+            "updated_at": "Historical Benchmark (2023 Archive)",
+            "fetched_at": "Historical Benchmark (2023 Archive)",
+            "forecast_updated_at": "Historical Benchmark (2023 Archive)",
+            "cache_age_seconds": None,
+            "fallback_reason": None,
+            "latitude": -67.6027,
+            "longitude": 62.8738
         }
         sim_label = "Austral Summer (24-Hour Sun)" if season.lower() == "summer" else "Polar Night (Sun Below Horizon)"
 

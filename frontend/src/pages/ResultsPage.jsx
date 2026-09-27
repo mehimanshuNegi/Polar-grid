@@ -105,7 +105,7 @@ export default function ResultsPage({
               className={`btn-res-pill ${simSeason === 'live' ? 'active' : ''}`}
               onClick={() => setSimSeason('live')}
             >
-              Live ECMWF IFS
+              Live Weather (ECMWF)
             </button>
           </div>
         </div>
@@ -135,12 +135,16 @@ export default function ResultsPage({
         </div>
 
         <div className="res-scenario-scope-badge" style={{ fontSize: '11.5px', color: 'var(--text-secondary)', marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontWeight: 600, color: simSeason === 'live' ? 'var(--color-teal)' : 'var(--text-secondary)' }}>
+          <span style={{ fontWeight: 600, color: simSeason === 'live' ? (resultsData?.weather_metadata?.is_live ? 'var(--color-teal)' : 'var(--color-warning, #B98532)') : 'var(--text-secondary)' }}>
             {simSeason === 'summer'
               ? 'Controlled Scenario Benchmark · Continuous 24h Solar'
               : simSeason === 'winter'
               ? 'Controlled Scenario Benchmark · Zero Solar Irradiance'
-              : 'Operational Weather Forecast · ECMWF IFS Atmospheric Model'}
+              : (resultsData?.weather_metadata?.is_live
+                  ? 'LIVE ECMWF IFS · Operational Atmospheric Forecast'
+                  : resultsData?.weather_metadata?.mode === 'cached'
+                  ? 'CACHED WEATHER · ECMWF IFS (Rate-Limited / Cached)'
+                  : 'Operational Weather Forecast · ECMWF Model')}
           </span>
           <span>·</span>
           <span>Horizon: <strong>{simHorizon} Hours</strong></span>

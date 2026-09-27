@@ -1,0 +1,46 @@
+name: ECMWF Weather Acquisition & Sync
+
+on:
+  schedule:
+    # Run every 2 hours to maintain fresh numerical weather forecast snapshots
+    - cron: '0 */2 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions console
+
+jobs:
+  acquire-and-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Acquire ECMWF Forecast
+        env:
+          OPEN_METEO_API_KEY: ${{ secrets.OPEN_METEO_API_KEY }}
+          WEATHER_ADMIN_KEY: ${{ secrets.WEATHER_ADMIN_KEY }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy
+          python src/weather/acquire_weather.py --output data/processed/latest_ecmwf_forecast.json
+
+      - name: Push to Deployed Render Instance
+        if: env.WEATHER_ADMIN_KEY != ''
+        env:
+          WEATHER_ADMIN_KEY: ${{ secrets.WEATHER_ADMIN_KEY }}
+        run: |
+          python src/weather/acquire_weather.py --push-to https://polar-grid.onrender.com --token "$WEATHER_ADMIN_KEY" || true
+
+      - name: Commit Updated Forecast Snapshot
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/processed/latest_ecmwf_forecast.json
+          git commit -m "Auto-refresh ECMWF forecast snapshot [skip ci]" || echo "No changes to commit"
+          git push || true
