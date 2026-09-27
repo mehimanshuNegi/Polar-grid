@@ -481,21 +481,57 @@ def get_schedule(
     summary["annual_validated_reduction_percent"] = 41.45
     summary["annual_validated_note"] = "Projected annual diesel reduction — 12-month simulation benchmark"
 
-    # Attach simulated equipment layer metadata
+    # Attach simulated equipment layer metadata and authoritative Hour 0 power balance
     alerts = list(eq["alerts"])
-    if (schedule_df["unmet_demand_kw"].max() if "unmet_demand_kw" in schedule_df.columns else 0.0) > 0.1:
-        if "🔴 Unmet station demand detected" not in alerts:
-            alerts.append("🔴 Unmet station demand detected")
+    
+    if len(schedule_df) > 0:
+        row0 = schedule_df.iloc[0]
+        cur_demand = round(float(row0["predicted_demand_kw"]), 1)
+        cur_wind = round(float(row0.get("wind_generation_kw", 0.0)), 1)
+        cur_solar = round(float(row0.get("solar_generation_kw", 0.0)), 1)
+        cur_diesel = round(float(row0.get("diesel_generation_kw", 0.0)), 1)
+        cur_dis = round(float(row0.get("battery_discharge_kw", 0.0)), 1)
+        cur_ch = round(float(row0.get("battery_charge_kw", 0.0)), 1)
+        raw_unmet = round(float(row0.get("unmet_demand_kw", 0.0)), 2)
+        cur_soc = round(float(row0.get("battery_soc_percent", 50.0)), 1)
+        
+        # Power balance consistency: total supplied generation into bus
+        cur_supply = round(cur_wind + cur_solar + cur_diesel + cur_dis, 1)
+        
+        # Numerical tolerance check: if generation + discharge covers (demand + charge) within 0.1 kW, unmet is strictly 0.0
+        if cur_supply >= (cur_demand + cur_ch - 0.1) or raw_unmet <= 0.1:
+            cur_unmet = 0.0
+        else:
+            cur_unmet = round(raw_unmet, 1)
+
+        # Only trigger unmet demand alert if current modeled hour actually has unmet load > tolerance
+        if cur_unmet > 0.1:
+            if "🔴 Unmet station demand detected" not in alerts:
+                alerts.append("🔴 Unmet station demand detected")
+
+        summary["current_demand_kw"] = cur_demand
+        summary["current_wind_kw"] = cur_wind
+        summary["current_solar_kw"] = cur_solar
+        summary["current_diesel_kw"] = cur_diesel
+        summary["current_battery_discharge_kw"] = cur_dis
+        summary["current_battery_charge_kw"] = cur_ch
+        summary["current_total_supply_kw"] = cur_supply
+        summary["current_unmet_demand_kw"] = cur_unmet
+        summary["current_projected_soc_percent"] = cur_soc
+    else:
+        summary["current_demand_kw"] = 0.0
+        summary["current_wind_kw"] = 0.0
+        summary["current_solar_kw"] = 0.0
+        summary["current_diesel_kw"] = 0.0
+        summary["current_battery_discharge_kw"] = 0.0
+        summary["current_battery_charge_kw"] = 0.0
+        summary["current_total_supply_kw"] = 0.0
+        summary["current_unmet_demand_kw"] = 0.0
+        summary["current_projected_soc_percent"] = round(eq["initial_soc"] * 100.0, 1)
 
     summary["battery_state"] = eq["battery_state"]
     summary["initial_soc"] = eq["initial_soc"]
     summary["initial_simulated_soc_percent"] = round(eq["initial_soc"] * 100.0, 1)
-    if len(schedule_df) > 0:
-        summary["current_projected_soc_percent"] = round(float(schedule_df.iloc[0]["battery_soc_percent"]), 1)
-        summary["current_diesel_kw"] = round(float(schedule_df.iloc[0]["diesel_generation_kw"]), 1)
-    else:
-        summary["current_projected_soc_percent"] = round(eq["initial_soc"] * 100.0, 1)
-        summary["current_diesel_kw"] = 0.0
     summary["diesel_state"] = eq["diesel_state"]
     summary["diesel_capacity_kw"] = eq["diesel_capacity_kw"]
     summary["max_available_diesel_kw"] = eq["diesel_capacity_kw"]
@@ -590,19 +626,50 @@ def run_dispatch(req: DispatchRunRequest):
     metrics["annual_validated_note"] = "Projected annual diesel reduction — 12-month simulation benchmark"
 
     alerts = list(eq["alerts"])
-    if (schedule_df["unmet_demand_kw"].max() if "unmet_demand_kw" in schedule_df.columns else 0.0) > 0.1:
-        if "🔴 Unmet station demand detected" not in alerts:
-            alerts.append("🔴 Unmet station demand detected")
+    if len(schedule_df) > 0:
+        row0 = schedule_df.iloc[0]
+        cur_demand = round(float(row0["predicted_demand_kw"]), 1)
+        cur_wind = round(float(row0.get("wind_generation_kw", 0.0)), 1)
+        cur_solar = round(float(row0.get("solar_generation_kw", 0.0)), 1)
+        cur_diesel = round(float(row0.get("diesel_generation_kw", 0.0)), 1)
+        cur_dis = round(float(row0.get("battery_discharge_kw", 0.0)), 1)
+        cur_ch = round(float(row0.get("battery_charge_kw", 0.0)), 1)
+        raw_unmet = round(float(row0.get("unmet_demand_kw", 0.0)), 2)
+        cur_soc = round(float(row0.get("battery_soc_percent", 50.0)), 1)
+        
+        cur_supply = round(cur_wind + cur_solar + cur_diesel + cur_dis, 1)
+        if cur_supply >= (cur_demand + cur_ch - 0.1) or raw_unmet <= 0.1:
+            cur_unmet = 0.0
+        else:
+            cur_unmet = round(raw_unmet, 1)
+
+        if cur_unmet > 0.1:
+            if "🔴 Unmet station demand detected" not in alerts:
+                alerts.append("🔴 Unmet station demand detected")
+
+        metrics["current_demand_kw"] = cur_demand
+        metrics["current_wind_kw"] = cur_wind
+        metrics["current_solar_kw"] = cur_solar
+        metrics["current_diesel_kw"] = cur_diesel
+        metrics["current_battery_discharge_kw"] = cur_dis
+        metrics["current_battery_charge_kw"] = cur_ch
+        metrics["current_total_supply_kw"] = cur_supply
+        metrics["current_unmet_demand_kw"] = cur_unmet
+        metrics["current_projected_soc_percent"] = cur_soc
+    else:
+        metrics["current_demand_kw"] = 0.0
+        metrics["current_wind_kw"] = 0.0
+        metrics["current_solar_kw"] = 0.0
+        metrics["current_diesel_kw"] = 0.0
+        metrics["current_battery_discharge_kw"] = 0.0
+        metrics["current_battery_charge_kw"] = 0.0
+        metrics["current_total_supply_kw"] = 0.0
+        metrics["current_unmet_demand_kw"] = 0.0
+        metrics["current_projected_soc_percent"] = round(eq["initial_soc"] * 100.0, 1)
 
     metrics["battery_state"] = eq["battery_state"]
     metrics["initial_soc"] = eq["initial_soc"]
     metrics["initial_simulated_soc_percent"] = round(eq["initial_soc"] * 100.0, 1)
-    if len(schedule_df) > 0:
-        metrics["current_projected_soc_percent"] = round(float(schedule_df.iloc[0]["battery_soc_percent"]), 1)
-        metrics["current_diesel_kw"] = round(float(schedule_df.iloc[0]["diesel_generation_kw"]), 1)
-    else:
-        metrics["current_projected_soc_percent"] = round(eq["initial_soc"] * 100.0, 1)
-        metrics["current_diesel_kw"] = 0.0
     metrics["diesel_state"] = eq["diesel_state"]
     metrics["diesel_capacity_kw"] = eq["diesel_capacity_kw"]
     metrics["max_available_diesel_kw"] = eq["diesel_capacity_kw"]

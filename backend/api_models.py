@@ -41,6 +41,13 @@ class DispatchSummaryMetrics(BaseModel):
     diesel_capacity_kw: Optional[float] = 375.0
     max_available_diesel_kw: Optional[float] = 375.0
     current_diesel_kw: Optional[float] = 0.0
+    current_demand_kw: Optional[float] = 0.0
+    current_wind_kw: Optional[float] = 0.0
+    current_solar_kw: Optional[float] = 0.0
+    current_battery_charge_kw: Optional[float] = 0.0
+    current_battery_discharge_kw: Optional[float] = 0.0
+    current_total_supply_kw: Optional[float] = 0.0
+    current_unmet_demand_kw: Optional[float] = 0.0
     alerts: Optional[List[str]] = []
     simulation_note: Optional[str] = "Prototype assumption — not live Mawson BMS/SCADA telemetry."
 

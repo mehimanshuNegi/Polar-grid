@@ -1,14 +1,14 @@
 {
   "time_horizon_hours": 24,
-  "total_demand_kwh": 3621.97,
-  "renewable_energy_used_kwh": 3764.35,
-  "diesel_energy_used_kwh": 0.0,
-  "battery_discharge_kwh": 0.7,
-  "battery_charge_kwh": 143.08,
+  "total_demand_kwh": 6240.96,
+  "renewable_energy_used_kwh": 355.8,
+  "diesel_energy_used_kwh": 5799.78,
+  "battery_discharge_kwh": 85.38,
+  "battery_charge_kwh": 0.0,
   "unmet_demand_kwh": 0.0,
-  "renewable_penetration_percent": 103.93,
-  "baseline_diesel_fuel_litres": 1229.27,
-  "optimized_diesel_fuel_litres": 0.0,
-  "diesel_fuel_saved_litres": 1229.27,
-  "diesel_reduction_percent": 100.0
+  "renewable_penetration_percent": 5.7,
+  "baseline_diesel_fuel_litres": 1857.83,
+  "optimized_diesel_fuel_litres": 1751.93,
+  "diesel_fuel_saved_litres": 105.9,
+  "diesel_reduction_percent": 5.7
 }

@@ -19,7 +19,9 @@ export default function Navbar({ currentPage, setCurrentPage, weatherMetadata })
   };
 
   const isLive = Boolean(weatherMetadata?.is_live);
-  const weatherLabel = isLive ? 'ECMWF IFS' : (weatherMetadata?.mode === 'cached' ? 'CACHED' : 'HISTORICAL');
+  const isCached = weatherMetadata?.mode === 'cached' || weatherMetadata?.source?.includes('Cached');
+  const weatherLabel = isLive ? 'ECMWF IFS' : (isCached ? 'CACHED WEATHER' : 'HISTORICAL');
+  const timestampPrefix = isLive ? 'Updated: ' : (isCached ? 'Cache updated: ' : 'Archive: ');
   const updateTimestamp = weatherMetadata?.updated_at || 'Checking feed...';
 
   return (
@@ -63,7 +65,7 @@ export default function Navbar({ currentPage, setCurrentPage, weatherMetadata })
             <span className="status-dot"></span>
             <span className="weather-headline">{isLive ? 'LIVE ECMWF IFS' : weatherLabel}</span>
           </div>
-          <span className="weather-time mono-text">Updated: {updateTimestamp}</span>
+          <span className="weather-time mono-text">{timestampPrefix}{updateTimestamp}</span>
         </div>
 
         {/* Mobile Hamburger Toggle */}

@@ -45,6 +45,7 @@ export default function OperationsPage({
   const [selectedBattery, setSelectedBattery] = useState(batteryState || 'NORMAL');
   const [selectedDiesel, setSelectedDiesel] = useState(dieselState || 'NORMAL');
   const [simulationAppliedMessage, setSimulationAppliedMessage] = useState(false);
+  const [simulationErrorMessage, setSimulationErrorMessage] = useState(false);
 
   useEffect(() => {
     if (batteryState) setSelectedBattery(batteryState);
@@ -54,13 +55,22 @@ export default function OperationsPage({
     if (dieselState) setSelectedDiesel(dieselState);
   }, [dieselState]);
 
-  const handleApplySimulation = () => {
+  const handleApplySimulation = async () => {
     if (onUpdateEquipmentState) {
-      onUpdateEquipmentState(selectedBattery, selectedDiesel);
-      setSimulationAppliedMessage(true);
-      setTimeout(() => {
+      const ok = await onUpdateEquipmentState(selectedBattery, selectedDiesel);
+      if (ok !== false) {
+        setSimulationAppliedMessage(true);
+        setSimulationErrorMessage(false);
+        setTimeout(() => {
+          setSimulationAppliedMessage(false);
+        }, 4000);
+      } else {
+        setSimulationErrorMessage(true);
         setSimulationAppliedMessage(false);
-      }, 4000);
+        setTimeout(() => {
+          setSimulationErrorMessage(false);
+        }, 4000);
+      }
     }
   };
 
@@ -68,18 +78,18 @@ export default function OperationsPage({
   const simulatedInitialSoc = operationsSummary?.initial_simulated_soc_percent ?? (batteryState === 'CRITICAL' ? 20 : batteryState === 'LOW' ? 25 : 50);
   const maxDieselAvailability = operationsSummary?.max_available_diesel_kw ?? (dieselState === 'CRITICAL' ? 125 : dieselState === 'LIMITED' ? 250 : 375);
 
-  // Hour 0 current operational values directly from optimizer schedule
+  // Hour 0 current operational values directly from authoritative optimizer schedule & summary
   const current = scheduleData[0] || {};
-  const currentDemand = Math.round((current.predicted_demand_kw ?? 0) * 10) / 10;
-  const currentWindPower = Math.round((current.wind_generation_kw ?? 0) * 10) / 10;
-  const currentSolarPower = Math.round((current.solar_generation_kw ?? 0) * 10) / 10;
+  const currentDemand = operationsSummary?.current_demand_kw ?? Math.round((current.predicted_demand_kw ?? 0) * 10) / 10;
+  const currentWindPower = operationsSummary?.current_wind_kw ?? Math.round((current.wind_generation_kw ?? 0) * 10) / 10;
+  const currentSolarPower = operationsSummary?.current_solar_kw ?? Math.round((current.solar_generation_kw ?? 0) * 10) / 10;
   const currentTotalRenewable = Math.round((currentWindPower + currentSolarPower) * 10) / 10;
 
-  const currentBatSoc = Math.round((current.battery_soc_percent ?? 50) * 10) / 10;
-  const currentBatCharge = Math.round((current.battery_charge_kw ?? 0) * 10) / 10;
-  const currentBatDischarge = Math.round((current.battery_discharge_kw ?? 0) * 10) / 10;
-  const currentDieselPower = Math.round((current.diesel_generation_kw ?? 0) * 10) / 10;
-  const currentUnmet = Math.round((current.unmet_demand_kw ?? 0) * 10) / 10;
+  const currentBatSoc = operationsSummary?.current_projected_soc_percent ?? Math.round((current.battery_soc_percent ?? 50) * 10) / 10;
+  const currentBatCharge = operationsSummary?.current_battery_charge_kw ?? Math.round((current.battery_charge_kw ?? 0) * 10) / 10;
+  const currentBatDischarge = operationsSummary?.current_battery_discharge_kw ?? Math.round((current.battery_discharge_kw ?? 0) * 10) / 10;
+  const currentDieselPower = operationsSummary?.current_diesel_kw ?? Math.round((current.diesel_generation_kw ?? 0) * 10) / 10;
+  const currentUnmet = operationsSummary?.current_unmet_demand_kw ?? Math.round((current.unmet_demand_kw ?? 0) * 10) / 10;
 
   const isCharging = currentBatCharge > 0.05;
   const isDischarging = currentBatDischarge > 0.05;
@@ -224,7 +234,9 @@ export default function OperationsPage({
 
   // Weather metadata
   const isLive = Boolean(weatherMetadata?.is_live);
-  const weatherLabel = isLive ? 'LIVE ECMWF IFS' : 'CACHED WEATHER';
+  const isCached = weatherMetadata?.mode === 'cached' || weatherMetadata?.source?.includes('Cached');
+  const weatherLabel = isLive ? 'LIVE ECMWF IFS' : (isCached ? 'CACHED WEATHER' : 'HISTORICAL');
+  const timestampPrefix = isLive ? 'Updated: ' : (isCached ? 'Cache updated: ' : 'Archive: ');
   const updateTimestamp = weatherMetadata?.updated_at || 'Checking feed...';
 
   // Alerts list from simulated equipment state
@@ -261,7 +273,7 @@ export default function OperationsPage({
             <span className="live-tag-text">{weatherLabel}</span>
           </div>
           <span className="ops-update-time mono-text">
-            Updated: {updateTimestamp}
+            {timestampPrefix}{updateTimestamp}
           </span>
         </div>
       </div>
@@ -360,6 +372,12 @@ export default function OperationsPage({
                   ✓ Simulation applied — dispatch updated
                 </div>
               )}
+
+              {simulationErrorMessage && (
+                <div className="sim-status-message" style={{ color: 'var(--color-critical)' }}>
+                  ⚠ Simulation update failed — previous state retained
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -388,7 +406,7 @@ export default function OperationsPage({
       <section className="ops-section current-power-section">
         <div className="section-head-row">
           <h2 className="section-title">CURRENT POWER</h2>
-          <span className="section-subtitle">Real-time station power balance and operational status</span>
+          <span className="section-subtitle">Current modeled power balance and operational status</span>
         </div>
 
         <div className="current-power-container">
@@ -477,7 +495,7 @@ export default function OperationsPage({
                   <span className="source-name">DIESEL</span>
                 </div>
                 <span className={`source-status-badge ${isDieselActive ? 'badge-active-diesel' : 'badge-standby'}`}>
-                  {isDieselActive ? 'Running' : 'Standby'}
+                  {isDieselActive ? 'Dispatched' : 'Standby'}
                 </span>
               </div>
               <div className="source-power-row">
@@ -485,9 +503,9 @@ export default function OperationsPage({
                 <span className="source-unit">kW</span>
               </div>
               <div className="source-detail-lines">
-                <div className="source-detail-line">Availability: <strong>{dieselState} ({maxDieselAvailability} kW)</strong></div>
-                <div className="source-detail-line">Current dispatch: <strong>{currentDieselPower} kW</strong></div>
-                <div className="source-detail-line">Max generators: <strong>{dieselState === 'CRITICAL' ? '1 of 3' : dieselState === 'LIMITED' ? '2 of 3' : '3 of 3'} online</strong></div>
+                <div className="source-detail-line">Simulated availability: <strong>{dieselState} ({maxDieselAvailability} kW)</strong></div>
+                <div className="source-detail-line">Modeled dispatch: <strong>{currentDieselPower} kW</strong></div>
+                <div className="source-detail-line">Max generators: <strong>{dieselState === 'CRITICAL' ? '1 of 3' : dieselState === 'LIMITED' ? '2 of 3' : '3 of 3'} available</strong></div>
               </div>
             </div>
           </div>

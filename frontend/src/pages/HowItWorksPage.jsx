@@ -120,7 +120,7 @@ export default function HowItWorksPage({ onNavigate }) {
             <div className="flow-step-box step-result result-teal">
               <span className="step-tag">FASTAPI & REACT</span>
               <h4>Operations Dashboard</h4>
-              <p>Real-time recommended action, single-line power flow diagram, and hourly dispatch schedule.</p>
+              <p>Modeled recommended action, single-line power flow diagram, and hourly dispatch schedule.</p>
             </div>
           </div>
         </div>

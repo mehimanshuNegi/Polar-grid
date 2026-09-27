@@ -107,21 +107,12 @@ export default function App() {
         if (sData.summary) {
           setOperationsSummary(sData.summary);
         }
+        return true;
       }
-
-      // Check live weather status if not yet loaded
-      const weatherRes = await fetch(`/api/weather/live?horizon=${h}`).catch(() => null);
-      if (weatherRes && weatherRes.ok) {
-        const wData = await weatherRes.json();
-        setWeatherMetadata({
-          source: wData.source,
-          mode: wData.mode,
-          is_live: wData.is_live,
-          updated_at: wData.updated_at
-        });
-      }
+      return false;
     } catch (err) {
       console.warn("Operational data fetch issue:", err);
+      return false;
     } finally {
       setLoadingOps(false);
     }
@@ -132,16 +123,25 @@ export default function App() {
   }, [horizon]);
 
   // Handler for simulated equipment state changes (re-runs HiGHS dispatch)
-  const handleUpdateEquipmentState = (newBatState, newDslState) => {
+  const handleUpdateEquipmentState = async (newBatState, newDslState) => {
     const nextB = newBatState !== undefined ? newBatState : batteryState;
     const nextD = newDslState !== undefined ? newDslState : dieselState;
-    setBatteryState(nextB);
-    setDieselState(nextD);
-    fetchOperationsData(horizon, nextB, nextD);
-    setDispatchNotice("Dispatch updated");
-    setTimeout(() => {
-      setDispatchNotice(null);
-    }, 3500);
+    const success = await fetchOperationsData(horizon, nextB, nextD);
+    if (success) {
+      setBatteryState(nextB);
+      setDieselState(nextD);
+      setDispatchNotice("Dispatch updated");
+      setTimeout(() => {
+        setDispatchNotice(null);
+      }, 3500);
+      return true;
+    } else {
+      setDispatchNotice("Simulation update failed");
+      setTimeout(() => {
+        setDispatchNotice(null);
+      }, 3500);
+      return false;
+    }
   };
 
   // 3. Fetch Results Simulation Data (Changes with simSeason or simHorizon)
