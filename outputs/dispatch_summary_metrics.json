@@ -2,13 +2,13 @@
   "time_horizon_hours": 24,
   "total_demand_kwh": 6240.96,
   "renewable_energy_used_kwh": 355.8,
-  "diesel_energy_used_kwh": 5736.45,
-  "battery_discharge_kwh": 14.23,
+  "diesel_energy_used_kwh": 5799.78,
+  "battery_discharge_kwh": 85.38,
   "battery_charge_kwh": 0.0,
-  "unmet_demand_kwh": 134.48,
+  "unmet_demand_kwh": 0.0,
   "renewable_penetration_percent": 5.7,
   "baseline_diesel_fuel_litres": 1857.83,
-  "optimized_diesel_fuel_litres": 1616.74,
-  "diesel_fuel_saved_litres": 241.09,
-  "diesel_reduction_percent": 12.98
+  "optimized_diesel_fuel_litres": 1751.93,
+  "diesel_fuel_saved_litres": 105.9,
+  "diesel_reduction_percent": 5.7
 }
