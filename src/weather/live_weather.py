@@ -1,17 +1,31 @@
 """
 Polar Grid: Live Weather Forecast & Fallback Engine
 Fetches hourly ECMWF IFS forecasts for Mawson Station (-67.6027, 62.8738) via Open-Meteo.
-Provides robust local caching and transparent fallback to historical ERA5 data.
+Provides robust server-side caching (15-min TTL), single-flight request deduplication,
+and transparent fallback to cached ECMWF / historical ERA5 data on HTTP 429 or network failures.
 """
 
 import os
 import json
+import time
+import copy
+import threading
 import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 import pandas as pd
 import numpy as np
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+# Shared in-memory cache across all service instances and API endpoints
+_GLOBAL_WEATHER_CACHE = {
+    "payload": None,
+    "fetched_at": 0.0,
+}
+_CACHE_TTL_SECONDS = 900.0  # 15 minutes cache lifetime (approx 10-15 minutes)
+_FETCH_LOCK = threading.Lock()
+
 
 class WeatherForecastService:
     def __init__(self, lat: float = -67.6027, lon: float = 62.8738, cache_dir: str = None):
@@ -24,6 +38,13 @@ class WeatherForecastService:
         os.makedirs(self.cache_dir, exist_ok=True)
         self.cache_file = os.path.join(self.cache_dir, "latest_ecmwf_forecast.json")
         self.era5_file = os.path.join(PROJECT_ROOT, "data", "processed", "mawson_hourly_energy_weather.csv")
+
+    @classmethod
+    def clear_in_memory_cache(cls):
+        """Clears server in-memory cache (for testing/diagnostics)."""
+        with _FETCH_LOCK:
+            _GLOBAL_WEATHER_CACHE["payload"] = None
+            _GLOBAL_WEATHER_CACHE["fetched_at"] = 0.0
 
     def fetch_live_ecmwf(self, forecast_days: int = 4, timeout_sec: int = 8) -> dict:
         """
@@ -80,50 +101,93 @@ class WeatherForecastService:
             "points": points
         }
         
-        # Save to local cache
+        # Save to local persistent disk cache
         try:
             with open(self.cache_file, "w") as f:
                 json.dump(payload, f, indent=2)
         except Exception as e:
-            print(f"Warning: Failed to cache live forecast: {e}")
+            print(f"Warning: Failed to cache live forecast to disk: {e}")
             
         return payload
 
     def get_weather_forecast(self, force_fallback: bool = False, horizon_hours: int = 72) -> dict:
         """
         Primary entry point.
-        Attempts to fetch live ECMWF forecast.
-        If network fails or force_fallback is True, gracefully falls back to:
-        1. Cached successful ECMWF forecast, or
-        2. Clean historical ERA5 reanalysis slice.
+        Checks shared in-memory server cache (15-min TTL).
+        If cache is empty/expired, coalesces simultaneous calls with a lock so only
+        ONE network request is sent to Open-Meteo.
+        If Open-Meteo returns HTTP 429 or fails, automatically falls back to:
+        1. Cached ECMWF forecast (mode: 'cached', is_live: False)
+        2. Historical ERA5 reanalysis (mode: 'historical_fallback', is_live: False)
         """
+        now = time.time()
+
+        # 1. Fast read path from in-memory cache
         if not force_fallback:
-            try:
-                live_payload = self.fetch_live_ecmwf()
-                live_payload["points"] = live_payload["points"][:horizon_hours]
-                live_payload["forecast_hours"] = len(live_payload["points"])
-                return live_payload
-            except Exception as ex:
-                print(f"Live ECMWF forecast unavailable ({ex}). Engaging fallback mechanism...")
+            cached_live = _GLOBAL_WEATHER_CACHE.get("payload")
+            fetched_at = _GLOBAL_WEATHER_CACHE.get("fetched_at", 0.0)
+            if cached_live is not None and (now - fetched_at) < _CACHE_TTL_SECONDS:
+                res = copy.deepcopy(cached_live)
+                res["points"] = res["points"][:horizon_hours]
+                res["forecast_hours"] = len(res["points"])
+                return res
 
-        # 1. Attempt cached forecast
-        if os.path.exists(self.cache_file):
-            try:
-                with open(self.cache_file, "r") as f:
-                    cached = json.load(f)
-                if cached.get("points") and len(cached["points"]) >= 24:
-                    cached["mode"] = "fallback"
-                    cached["is_live"] = False
-                    cached["source"] = "ECMWF IFS (Cached)"
-                    cached["fallback_reason"] = "Live API temporarily unavailable; using latest cached ECMWF forecast"
-                    cached["points"] = cached["points"][:horizon_hours]
-                    cached["forecast_hours"] = len(cached["points"])
-                    return cached
-            except Exception as e:
-                print(f"Cached forecast read failed: {e}")
+        # 2. Synchronized fetch path: only ONE thread fetches while others wait
+        with _FETCH_LOCK:
+            now = time.time()
+            # Double-check if another thread just populated the cache while we waited for the lock
+            if not force_fallback:
+                cached_live = _GLOBAL_WEATHER_CACHE.get("payload")
+                fetched_at = _GLOBAL_WEATHER_CACHE.get("fetched_at", 0.0)
+                if cached_live is not None and (now - fetched_at) < _CACHE_TTL_SECONDS:
+                    res = copy.deepcopy(cached_live)
+                    res["points"] = res["points"][:horizon_hours]
+                    res["forecast_hours"] = len(res["points"])
+                    return res
 
-        # 2. Historical ERA5 fallback
-        return self._build_era5_fallback(horizon_hours)
+                # Call Open-Meteo live endpoint
+                try:
+                    live_payload = self.fetch_live_ecmwf()
+                    _GLOBAL_WEATHER_CACHE["payload"] = live_payload
+                    _GLOBAL_WEATHER_CACHE["fetched_at"] = time.time()
+                    
+                    res = copy.deepcopy(live_payload)
+                    res["points"] = res["points"][:horizon_hours]
+                    res["forecast_hours"] = len(res["points"])
+                    return res
+                except urllib.error.HTTPError as http_err:
+                    if http_err.code == 429:
+                        print(f"[RateLimit] Open-Meteo returned HTTP 429 Too Many Requests. Engaging cached forecast fallback.")
+                    else:
+                        print(f"[HTTPError] Open-Meteo returned HTTP {http_err.code}: {http_err}. Engaging cached forecast fallback.")
+                except Exception as ex:
+                    print(f"[Network] Live ECMWF forecast unavailable ({ex}). Engaging fallback mechanism...")
+
+            # 3. Fallback path (HTTP 429, network failure, or force_fallback=True)
+            # Try disk cache first
+            if os.path.exists(self.cache_file):
+                try:
+                    with open(self.cache_file, "r") as f:
+                        cached = json.load(f)
+                    if cached.get("points") and len(cached["points"]) >= 24:
+                        cached["mode"] = "cached"
+                        cached["is_live"] = False
+                        cached["source"] = "ECMWF IFS (Cached)"
+                        cached["fallback_reason"] = "Live API rate-limited (HTTP 429) or offline; using latest cached ECMWF forecast"
+                        cached["points"] = cached["points"][:horizon_hours]
+                        cached["forecast_hours"] = len(cached["points"])
+                        
+                        # Populate in-memory cache with fallback data for 5 minutes to prevent immediate retry storms
+                        if not force_fallback:
+                            _GLOBAL_WEATHER_CACHE["payload"] = copy.deepcopy(cached)
+                            _GLOBAL_WEATHER_CACHE["fetched_at"] = time.time() - (_CACHE_TTL_SECONDS - 300.0)
+
+                        return cached
+                except Exception as e:
+                    print(f"Cached forecast read failed: {e}")
+
+            # 4. Historical ERA5 fallback if no cached ECMWF forecast exists
+            return self._build_era5_fallback(horizon_hours)
 
     def _build_era5_fallback(self, horizon_hours: int = 72) -> dict:
         """Builds fallback payload from stored ERA5 historical reanalysis."""
@@ -149,7 +213,7 @@ class WeatherForecastService:
         return {
             "source": "ERA5 Reanalysis (Fallback)",
             "provider": "ECMWF ERA5 Historical Reanalysis",
-            "mode": "fallback",
+            "mode": "historical_fallback",
             "is_live": False,
             "updated_at": "Historical Benchmark (2023 Archive)",
             "fallback_reason": "Live weather endpoint offline; running verified ERA5 historical scenario",
@@ -181,3 +245,4 @@ if __name__ == "__main__":
     res = service.get_weather_forecast(horizon_hours=24)
     print(f"Source: {res['source']}, Mode: {res['mode']}, Updated: {res['updated_at']}, Points: {len(res['points'])}")
     print("First point:", res['points'][0])
+

@@ -143,7 +143,7 @@ class TestPolarGridComprehensive(unittest.TestCase):
         """Tests that fallback engages when forced or offline, with explicit source label."""
         service = WeatherForecastService()
         fallback_res = service.get_weather_forecast(force_fallback=True, horizon_hours=24)
-        self.assertEqual(fallback_res["mode"], "fallback")
+        self.assertIn(fallback_res["mode"], ["fallback", "cached", "historical_fallback"])
         self.assertFalse(fallback_res["is_live"])
         self.assertTrue(len(fallback_res["points"]) == 24)
         # Source must explicitly declare fallback
