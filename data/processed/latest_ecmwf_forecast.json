@@ -4,333 +4,117 @@
   "model": "ECMWF IFS (0.25\u00b0)",
   "mode": "live",
   "is_live": true,
-  "updated_at": "10 Oct 2026, 23:21 UTC",
-  "fetched_at": "10 Oct 2026, 23:21 UTC",
-  "forecast_updated_at": "10 Oct 2026, 00:00 UTC",
+  "updated_at": "11 Oct 2026, 04:59 UTC",
+  "fetched_at": "11 Oct 2026, 04:59 UTC",
+  "forecast_updated_at": "11 Oct 2026, 00:00 UTC",
   "cache_age_seconds": 0,
   "latitude": -67.6027,
   "longitude": 62.8738,
   "forecast_hours": 96,
   "points": [
     {
-      "timestamp": "2026-10-10T00:00",
-      "temperature_celsius": -16.2,
-      "wind_speed_ms": 9.55,
-      "wind_direction_deg": 84.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-10T01:00",
-      "temperature_celsius": -16.1,
-      "wind_speed_ms": 9.85,
-      "wind_direction_deg": 80.0,
-      "solar_radiation_wm2": 3.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 3.0
-    },
-    {
-      "timestamp": "2026-10-10T02:00",
-      "temperature_celsius": -16.0,
-      "wind_speed_ms": 10.14,
-      "wind_direction_deg": 75.0,
-      "solar_radiation_wm2": 28.0,
-      "direct_radiation_wm2": 13.5,
-      "diffuse_radiation_wm2": 26.7
-    },
-    {
-      "timestamp": "2026-10-10T03:00",
-      "temperature_celsius": -15.6,
-      "wind_speed_ms": 10.44,
-      "wind_direction_deg": 73.0,
-      "solar_radiation_wm2": 59.0,
-      "direct_radiation_wm2": 28.1,
-      "diffuse_radiation_wm2": 53.5
-    },
-    {
-      "timestamp": "2026-10-10T04:00",
-      "temperature_celsius": -14.8,
-      "wind_speed_ms": 10.55,
-      "wind_direction_deg": 75.0,
-      "solar_radiation_wm2": 93.0,
-      "direct_radiation_wm2": 42.2,
-      "diffuse_radiation_wm2": 80.9
-    },
-    {
-      "timestamp": "2026-10-10T05:00",
-      "temperature_celsius": -13.7,
-      "wind_speed_ms": 10.59,
-      "wind_direction_deg": 79.0,
-      "solar_radiation_wm2": 122.0,
-      "direct_radiation_wm2": 48.9,
-      "diffuse_radiation_wm2": 104.0
-    },
-    {
-      "timestamp": "2026-10-10T06:00",
-      "temperature_celsius": -12.8,
-      "wind_speed_ms": 10.75,
-      "wind_direction_deg": 85.0,
-      "solar_radiation_wm2": 138.0,
-      "direct_radiation_wm2": 45.3,
-      "diffuse_radiation_wm2": 118.5
-    },
-    {
-      "timestamp": "2026-10-10T07:00",
-      "temperature_celsius": -12.1,
-      "wind_speed_ms": 11.21,
-      "wind_direction_deg": 92.0,
-      "solar_radiation_wm2": 142.0,
-      "direct_radiation_wm2": 38.0,
-      "diffuse_radiation_wm2": 124.1
-    },
-    {
-      "timestamp": "2026-10-10T08:00",
-      "temperature_celsius": -11.6,
-      "wind_speed_ms": 11.89,
-      "wind_direction_deg": 100.0,
-      "solar_radiation_wm2": 137.0,
-      "direct_radiation_wm2": 31.2,
-      "diffuse_radiation_wm2": 121.8
-    },
-    {
-      "timestamp": "2026-10-10T09:00",
-      "temperature_celsius": -11.2,
-      "wind_speed_ms": 13.03,
-      "wind_direction_deg": 108.0,
-      "solar_radiation_wm2": 128.0,
-      "direct_radiation_wm2": 27.6,
-      "diffuse_radiation_wm2": 114.9
-    },
-    {
-      "timestamp": "2026-10-10T10:00",
-      "temperature_celsius": -11.1,
-      "wind_speed_ms": 14.63,
-      "wind_direction_deg": 116.0,
-      "solar_radiation_wm2": 112.0,
-      "direct_radiation_wm2": 23.9,
-      "diffuse_radiation_wm2": 101.4
-    },
-    {
-      "timestamp": "2026-10-10T11:00",
-      "temperature_celsius": -11.1,
-      "wind_speed_ms": 16.57,
-      "wind_direction_deg": 122.0,
-      "solar_radiation_wm2": 90.0,
-      "direct_radiation_wm2": 19.2,
-      "diffuse_radiation_wm2": 82.6
-    },
-    {
-      "timestamp": "2026-10-10T12:00",
-      "temperature_celsius": -11.1,
-      "wind_speed_ms": 18.09,
-      "wind_direction_deg": 125.0,
-      "solar_radiation_wm2": 64.0,
-      "direct_radiation_wm2": 12.6,
-      "diffuse_radiation_wm2": 60.1
-    },
-    {
-      "timestamp": "2026-10-10T13:00",
-      "temperature_celsius": -11.1,
-      "wind_speed_ms": 18.59,
-      "wind_direction_deg": 125.0,
-      "solar_radiation_wm2": 39.0,
-      "direct_radiation_wm2": 5.4,
-      "diffuse_radiation_wm2": 37.8
-    },
-    {
-      "timestamp": "2026-10-10T14:00",
-      "temperature_celsius": -11.0,
-      "wind_speed_ms": 18.61,
-      "wind_direction_deg": 124.0,
-      "solar_radiation_wm2": 19.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 19.0
-    },
-    {
-      "timestamp": "2026-10-10T15:00",
-      "temperature_celsius": -10.9,
-      "wind_speed_ms": 18.67,
-      "wind_direction_deg": 123.0,
-      "solar_radiation_wm2": 4.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 4.0
-    },
-    {
-      "timestamp": "2026-10-10T16:00",
-      "temperature_celsius": -10.7,
-      "wind_speed_ms": 18.92,
-      "wind_direction_deg": 123.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-10T17:00",
-      "temperature_celsius": -10.4,
-      "wind_speed_ms": 19.25,
-      "wind_direction_deg": 125.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-10T18:00",
-      "temperature_celsius": -10.2,
-      "wind_speed_ms": 19.34,
-      "wind_direction_deg": 126.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-10T19:00",
-      "temperature_celsius": -10.1,
-      "wind_speed_ms": 19.26,
-      "wind_direction_deg": 126.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-10T20:00",
-      "temperature_celsius": -10.0,
-      "wind_speed_ms": 19.2,
-      "wind_direction_deg": 126.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-10T21:00",
-      "temperature_celsius": -9.9,
-      "wind_speed_ms": 18.93,
-      "wind_direction_deg": 126.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-10T22:00",
-      "temperature_celsius": -9.8,
-      "wind_speed_ms": 18.62,
-      "wind_direction_deg": 126.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-10T23:00",
-      "temperature_celsius": -9.8,
-      "wind_speed_ms": 18.26,
-      "wind_direction_deg": 126.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
       "timestamp": "2026-10-11T00:00",
-      "temperature_celsius": -9.7,
-      "wind_speed_ms": 17.96,
-      "wind_direction_deg": 126.0,
+      "temperature_celsius": -9.8,
+      "wind_speed_ms": 16.56,
+      "wind_direction_deg": 123.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-11T01:00",
-      "temperature_celsius": -9.7,
-      "wind_speed_ms": 17.66,
-      "wind_direction_deg": 126.0,
+      "temperature_celsius": -9.8,
+      "wind_speed_ms": 16.64,
+      "wind_direction_deg": 124.0,
       "solar_radiation_wm2": 4.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 4.0
     },
     {
       "timestamp": "2026-10-11T02:00",
-      "temperature_celsius": -9.7,
-      "wind_speed_ms": 17.36,
-      "wind_direction_deg": 127.0,
+      "temperature_celsius": -9.9,
+      "wind_speed_ms": 16.93,
+      "wind_direction_deg": 125.0,
       "solar_radiation_wm2": 31.0,
       "direct_radiation_wm2": 17.0,
       "diffuse_radiation_wm2": 29.3
     },
     {
       "timestamp": "2026-10-11T03:00",
-      "temperature_celsius": -9.7,
-      "wind_speed_ms": 17.0,
-      "wind_direction_deg": 127.0,
-      "solar_radiation_wm2": 66.0,
-      "direct_radiation_wm2": 36.8,
-      "diffuse_radiation_wm2": 58.6
+      "temperature_celsius": -9.9,
+      "wind_speed_ms": 17.1,
+      "wind_direction_deg": 126.0,
+      "solar_radiation_wm2": 65.0,
+      "direct_radiation_wm2": 35.1,
+      "diffuse_radiation_wm2": 57.9
     },
     {
       "timestamp": "2026-10-11T04:00",
-      "temperature_celsius": -9.5,
-      "wind_speed_ms": 16.54,
-      "wind_direction_deg": 126.0,
-      "solar_radiation_wm2": 109.0,
-      "direct_radiation_wm2": 62.4,
-      "diffuse_radiation_wm2": 90.7
+      "temperature_celsius": -9.6,
+      "wind_speed_ms": 16.79,
+      "wind_direction_deg": 125.0,
+      "solar_radiation_wm2": 103.0,
+      "direct_radiation_wm2": 53.3,
+      "diffuse_radiation_wm2": 87.4
     },
     {
       "timestamp": "2026-10-11T05:00",
       "temperature_celsius": -9.3,
-      "wind_speed_ms": 16.03,
-      "wind_direction_deg": 125.0,
-      "solar_radiation_wm2": 153.0,
-      "direct_radiation_wm2": 86.5,
-      "diffuse_radiation_wm2": 120.7
+      "wind_speed_ms": 16.36,
+      "wind_direction_deg": 124.0,
+      "solar_radiation_wm2": 144.0,
+      "direct_radiation_wm2": 73.5,
+      "diffuse_radiation_wm2": 116.5
     },
     {
       "timestamp": "2026-10-11T06:00",
-      "temperature_celsius": -9.0,
-      "wind_speed_ms": 15.67,
-      "wind_direction_deg": 123.0,
-      "solar_radiation_wm2": 197.0,
-      "direct_radiation_wm2": 114.3,
-      "diffuse_radiation_wm2": 147.2
+      "temperature_celsius": -8.9,
+      "wind_speed_ms": 16.09,
+      "wind_direction_deg": 122.0,
+      "solar_radiation_wm2": 188.0,
+      "direct_radiation_wm2": 100.9,
+      "diffuse_radiation_wm2": 144.0
     },
     {
       "timestamp": "2026-10-11T07:00",
-      "temperature_celsius": -8.8,
-      "wind_speed_ms": 15.78,
-      "wind_direction_deg": 123.0,
-      "solar_radiation_wm2": 235.0,
-      "direct_radiation_wm2": 144.4,
-      "diffuse_radiation_wm2": 166.2
+      "temperature_celsius": -8.7,
+      "wind_speed_ms": 16.26,
+      "wind_direction_deg": 122.0,
+      "solar_radiation_wm2": 229.0,
+      "direct_radiation_wm2": 134.8,
+      "diffuse_radiation_wm2": 164.7
     },
     {
       "timestamp": "2026-10-11T08:00",
       "temperature_celsius": -8.5,
-      "wind_speed_ms": 16.04,
+      "wind_speed_ms": 16.67,
       "wind_direction_deg": 122.0,
-      "solar_radiation_wm2": 256.0,
-      "direct_radiation_wm2": 165.9,
-      "diffuse_radiation_wm2": 174.4
+      "solar_radiation_wm2": 253.0,
+      "direct_radiation_wm2": 160.9,
+      "diffuse_radiation_wm2": 173.8
     },
     {
       "timestamp": "2026-10-11T09:00",
-      "temperature_celsius": -8.2,
-      "wind_speed_ms": 16.21,
-      "wind_direction_deg": 122.0,
-      "solar_radiation_wm2": 254.0,
-      "direct_radiation_wm2": 171.7,
-      "diffuse_radiation_wm2": 171.3
+      "temperature_celsius": -8.3,
+      "wind_speed_ms": 16.73,
+      "wind_direction_deg": 123.0,
+      "solar_radiation_wm2": 253.0,
+      "direct_radiation_wm2": 169.9,
+      "diffuse_radiation_wm2": 171.1
     },
     {
       "timestamp": "2026-10-11T10:00",
       "temperature_celsius": -8.1,
-      "wind_speed_ms": 15.98,
-      "wind_direction_deg": 122.0,
+      "wind_speed_ms": 16.14,
+      "wind_direction_deg": 123.0,
       "solar_radiation_wm2": 232.0,
       "direct_radiation_wm2": 164.9,
       "diffuse_radiation_wm2": 158.3
     },
     {
       "timestamp": "2026-10-11T11:00",
-      "temperature_celsius": -8.0,
-      "wind_speed_ms": 15.54,
+      "temperature_celsius": -7.8,
+      "wind_speed_ms": 15.29,
       "wind_direction_deg": 122.0,
       "solar_radiation_wm2": 195.0,
       "direct_radiation_wm2": 148.5,
@@ -338,62 +122,62 @@
     },
     {
       "timestamp": "2026-10-11T12:00",
-      "temperature_celsius": -7.9,
-      "wind_speed_ms": 15.23,
-      "wind_direction_deg": 122.0,
-      "solar_radiation_wm2": 147.0,
-      "direct_radiation_wm2": 120.4,
-      "diffuse_radiation_wm2": 109.4
+      "temperature_celsius": -7.6,
+      "wind_speed_ms": 14.84,
+      "wind_direction_deg": 123.0,
+      "solar_radiation_wm2": 145.0,
+      "direct_radiation_wm2": 116.1,
+      "diffuse_radiation_wm2": 108.8
     },
     {
       "timestamp": "2026-10-11T13:00",
-      "temperature_celsius": -7.8,
-      "wind_speed_ms": 15.29,
-      "wind_direction_deg": 122.0,
-      "solar_radiation_wm2": 96.0,
-      "direct_radiation_wm2": 85.7,
-      "diffuse_radiation_wm2": 77.0
+      "temperature_celsius": -7.6,
+      "wind_speed_ms": 15.03,
+      "wind_direction_deg": 123.0,
+      "solar_radiation_wm2": 93.0,
+      "direct_radiation_wm2": 78.4,
+      "diffuse_radiation_wm2": 75.6
     },
     {
       "timestamp": "2026-10-11T14:00",
-      "temperature_celsius": -7.6,
-      "wind_speed_ms": 15.53,
-      "wind_direction_deg": 123.0,
-      "solar_radiation_wm2": 51.0,
-      "direct_radiation_wm2": 57.3,
-      "diffuse_radiation_wm2": 43.9
+      "temperature_celsius": -7.5,
+      "wind_speed_ms": 15.5,
+      "wind_direction_deg": 124.0,
+      "solar_radiation_wm2": 48.0,
+      "direct_radiation_wm2": 47.1,
+      "diffuse_radiation_wm2": 42.1
     },
     {
       "timestamp": "2026-10-11T15:00",
-      "temperature_celsius": -7.4,
-      "wind_speed_ms": 15.75,
-      "wind_direction_deg": 123.0,
-      "solar_radiation_wm2": 12.0,
-      "direct_radiation_wm2": 7.5,
-      "diffuse_radiation_wm2": 11.6
+      "temperature_celsius": -7.5,
+      "wind_speed_ms": 16.0,
+      "wind_direction_deg": 124.0,
+      "solar_radiation_wm2": 11.0,
+      "direct_radiation_wm2": 3.5,
+      "diffuse_radiation_wm2": 10.8
     },
     {
       "timestamp": "2026-10-11T16:00",
       "temperature_celsius": -7.3,
-      "wind_speed_ms": 16.09,
-      "wind_direction_deg": 122.0,
+      "wind_speed_ms": 16.42,
+      "wind_direction_deg": 123.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-11T17:00",
-      "temperature_celsius": -7.2,
-      "wind_speed_ms": 16.33,
-      "wind_direction_deg": 121.0,
+      "temperature_celsius": -7.1,
+      "wind_speed_ms": 16.79,
+      "wind_direction_deg": 122.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-11T18:00",
-      "temperature_celsius": -7.1,
-      "wind_speed_ms": 16.4,
+      "temperature_celsius": -6.9,
+      "wind_speed_ms": 16.84,
       "wind_direction_deg": 120.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
@@ -401,18 +185,18 @@
     },
     {
       "timestamp": "2026-10-11T19:00",
-      "temperature_celsius": -7.0,
-      "wind_speed_ms": 16.08,
-      "wind_direction_deg": 119.0,
+      "temperature_celsius": -6.7,
+      "wind_speed_ms": 16.32,
+      "wind_direction_deg": 117.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-11T20:00",
-      "temperature_celsius": -6.8,
-      "wind_speed_ms": 15.53,
-      "wind_direction_deg": 119.0,
+      "temperature_celsius": -6.6,
+      "wind_speed_ms": 15.6,
+      "wind_direction_deg": 113.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
@@ -420,224 +204,224 @@
     {
       "timestamp": "2026-10-11T21:00",
       "temperature_celsius": -6.6,
-      "wind_speed_ms": 14.94,
-      "wind_direction_deg": 118.0,
+      "wind_speed_ms": 14.96,
+      "wind_direction_deg": 110.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-11T22:00",
-      "temperature_celsius": -6.5,
-      "wind_speed_ms": 14.45,
-      "wind_direction_deg": 116.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-11T23:00",
-      "temperature_celsius": -6.5,
-      "wind_speed_ms": 14.02,
-      "wind_direction_deg": 113.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-12T00:00",
-      "temperature_celsius": -6.5,
-      "wind_speed_ms": 13.52,
-      "wind_direction_deg": 111.0,
-      "solar_radiation_wm2": 0.0,
-      "direct_radiation_wm2": 0.0,
-      "diffuse_radiation_wm2": 0.0
-    },
-    {
-      "timestamp": "2026-10-12T01:00",
-      "temperature_celsius": -6.5,
-      "wind_speed_ms": 12.89,
-      "wind_direction_deg": 111.0,
-      "solar_radiation_wm2": 9.0,
-      "direct_radiation_wm2": 3.3,
-      "diffuse_radiation_wm2": 8.8
-    },
-    {
-      "timestamp": "2026-10-12T02:00",
-      "temperature_celsius": -6.5,
-      "wind_speed_ms": 12.2,
-      "wind_direction_deg": 112.0,
-      "solar_radiation_wm2": 56.0,
-      "direct_radiation_wm2": 108.2,
-      "diffuse_radiation_wm2": 44.2
-    },
-    {
-      "timestamp": "2026-10-12T03:00",
-      "temperature_celsius": -6.5,
-      "wind_speed_ms": 11.74,
-      "wind_direction_deg": 113.0,
-      "solar_radiation_wm2": 125.0,
-      "direct_radiation_wm2": 200.3,
-      "diffuse_radiation_wm2": 83.5
-    },
-    {
-      "timestamp": "2026-10-12T04:00",
-      "temperature_celsius": -6.4,
-      "wind_speed_ms": 11.52,
-      "wind_direction_deg": 113.0,
-      "solar_radiation_wm2": 221.0,
-      "direct_radiation_wm2": 353.5,
-      "diffuse_radiation_wm2": 115.1
-    },
-    {
-      "timestamp": "2026-10-12T05:00",
-      "temperature_celsius": -6.1,
-      "wind_speed_ms": 11.38,
-      "wind_direction_deg": 113.0,
-      "solar_radiation_wm2": 324.0,
-      "direct_radiation_wm2": 506.0,
-      "diffuse_radiation_wm2": 131.8
-    },
-    {
-      "timestamp": "2026-10-12T06:00",
-      "temperature_celsius": -5.9,
-      "wind_speed_ms": 11.16,
-      "wind_direction_deg": 113.0,
-      "solar_radiation_wm2": 414.0,
-      "direct_radiation_wm2": 622.9,
-      "diffuse_radiation_wm2": 138.7
-    },
-    {
-      "timestamp": "2026-10-12T07:00",
-      "temperature_celsius": -5.8,
-      "wind_speed_ms": 10.57,
-      "wind_direction_deg": 113.0,
-      "solar_radiation_wm2": 484.0,
-      "direct_radiation_wm2": 712.5,
-      "diffuse_radiation_wm2": 140.4
-    },
-    {
-      "timestamp": "2026-10-12T08:00",
-      "temperature_celsius": -5.6,
-      "wind_speed_ms": 9.94,
-      "wind_direction_deg": 114.0,
-      "solar_radiation_wm2": 520.0,
-      "direct_radiation_wm2": 761.7,
-      "diffuse_radiation_wm2": 140.8
-    },
-    {
-      "timestamp": "2026-10-12T09:00",
-      "temperature_celsius": -5.5,
-      "wind_speed_ms": 9.35,
-      "wind_direction_deg": 115.0,
-      "solar_radiation_wm2": 513.0,
-      "direct_radiation_wm2": 764.6,
-      "diffuse_radiation_wm2": 140.2
-    },
-    {
-      "timestamp": "2026-10-12T10:00",
-      "temperature_celsius": -5.5,
-      "wind_speed_ms": 9.13,
-      "wind_direction_deg": 115.0,
-      "solar_radiation_wm2": 466.0,
-      "direct_radiation_wm2": 726.9,
-      "diffuse_radiation_wm2": 137.3
-    },
-    {
-      "timestamp": "2026-10-12T11:00",
-      "temperature_celsius": -5.6,
-      "wind_speed_ms": 9.05,
-      "wind_direction_deg": 113.0,
-      "solar_radiation_wm2": 388.0,
-      "direct_radiation_wm2": 652.7,
-      "diffuse_radiation_wm2": 130.7
-    },
-    {
-      "timestamp": "2026-10-12T12:00",
-      "temperature_celsius": -5.8,
-      "wind_speed_ms": 8.69,
-      "wind_direction_deg": 113.0,
-      "solar_radiation_wm2": 283.0,
-      "direct_radiation_wm2": 520.6,
-      "diffuse_radiation_wm2": 117.7
-    },
-    {
-      "timestamp": "2026-10-12T13:00",
-      "temperature_celsius": -6.0,
-      "wind_speed_ms": 7.88,
-      "wind_direction_deg": 114.0,
-      "solar_radiation_wm2": 175.0,
-      "direct_radiation_wm2": 356.9,
-      "diffuse_radiation_wm2": 93.8
-    },
-    {
-      "timestamp": "2026-10-12T14:00",
-      "temperature_celsius": -6.3,
-      "wind_speed_ms": 6.75,
-      "wind_direction_deg": 115.0,
-      "solar_radiation_wm2": 89.0,
-      "direct_radiation_wm2": 236.1,
-      "diffuse_radiation_wm2": 58.3
-    },
-    {
-      "timestamp": "2026-10-12T15:00",
       "temperature_celsius": -6.6,
-      "wind_speed_ms": 5.55,
-      "wind_direction_deg": 116.0,
-      "solar_radiation_wm2": 22.0,
-      "direct_radiation_wm2": 78.7,
-      "diffuse_radiation_wm2": 17.9
-    },
-    {
-      "timestamp": "2026-10-12T16:00",
-      "temperature_celsius": -6.8,
-      "wind_speed_ms": 4.24,
+      "wind_speed_ms": 14.61,
       "wind_direction_deg": 109.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
+      "timestamp": "2026-10-11T23:00",
+      "temperature_celsius": -6.7,
+      "wind_speed_ms": 14.34,
+      "wind_direction_deg": 111.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-12T00:00",
+      "temperature_celsius": -6.7,
+      "wind_speed_ms": 13.95,
+      "wind_direction_deg": 112.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-12T01:00",
+      "temperature_celsius": -6.8,
+      "wind_speed_ms": 13.21,
+      "wind_direction_deg": 114.0,
+      "solar_radiation_wm2": 10.0,
+      "direct_radiation_wm2": 7.6,
+      "diffuse_radiation_wm2": 9.6
+    },
+    {
+      "timestamp": "2026-10-12T02:00",
+      "temperature_celsius": -6.8,
+      "wind_speed_ms": 12.31,
+      "wind_direction_deg": 114.0,
+      "solar_radiation_wm2": 65.0,
+      "direct_radiation_wm2": 162.0,
+      "diffuse_radiation_wm2": 47.4
+    },
+    {
+      "timestamp": "2026-10-12T03:00",
+      "temperature_celsius": -6.8,
+      "wind_speed_ms": 11.54,
+      "wind_direction_deg": 116.0,
+      "solar_radiation_wm2": 143.0,
+      "direct_radiation_wm2": 274.9,
+      "diffuse_radiation_wm2": 86.0
+    },
+    {
+      "timestamp": "2026-10-12T04:00",
+      "temperature_celsius": -6.5,
+      "wind_speed_ms": 11.09,
+      "wind_direction_deg": 116.0,
+      "solar_radiation_wm2": 243.0,
+      "direct_radiation_wm2": 429.8,
+      "diffuse_radiation_wm2": 114.2
+    },
+    {
+      "timestamp": "2026-10-12T05:00",
+      "temperature_celsius": -6.2,
+      "wind_speed_ms": 10.78,
+      "wind_direction_deg": 116.0,
+      "solar_radiation_wm2": 347.0,
+      "direct_radiation_wm2": 573.0,
+      "diffuse_radiation_wm2": 129.4
+    },
+    {
+      "timestamp": "2026-10-12T06:00",
+      "temperature_celsius": -5.9,
+      "wind_speed_ms": 10.42,
+      "wind_direction_deg": 116.0,
+      "solar_radiation_wm2": 431.0,
+      "direct_radiation_wm2": 665.5,
+      "diffuse_radiation_wm2": 136.8
+    },
+    {
+      "timestamp": "2026-10-12T07:00",
+      "temperature_celsius": -5.7,
+      "wind_speed_ms": 9.97,
+      "wind_direction_deg": 116.0,
+      "solar_radiation_wm2": 490.0,
+      "direct_radiation_wm2": 725.7,
+      "diffuse_radiation_wm2": 140.0
+    },
+    {
+      "timestamp": "2026-10-12T08:00",
+      "temperature_celsius": -5.5,
+      "wind_speed_ms": 9.48,
+      "wind_direction_deg": 116.0,
+      "solar_radiation_wm2": 516.0,
+      "direct_radiation_wm2": 753.5,
+      "diffuse_radiation_wm2": 140.9
+    },
+    {
+      "timestamp": "2026-10-12T09:00",
+      "temperature_celsius": -5.4,
+      "wind_speed_ms": 8.94,
+      "wind_direction_deg": 117.0,
+      "solar_radiation_wm2": 505.0,
+      "direct_radiation_wm2": 748.4,
+      "diffuse_radiation_wm2": 140.1
+    },
+    {
+      "timestamp": "2026-10-12T10:00",
+      "temperature_celsius": -5.4,
+      "wind_speed_ms": 8.5,
+      "wind_direction_deg": 117.0,
+      "solar_radiation_wm2": 459.0,
+      "direct_radiation_wm2": 711.7,
+      "diffuse_radiation_wm2": 137.2
+    },
+    {
+      "timestamp": "2026-10-12T11:00",
+      "temperature_celsius": -5.5,
+      "wind_speed_ms": 8.01,
+      "wind_direction_deg": 116.0,
+      "solar_radiation_wm2": 384.0,
+      "direct_radiation_wm2": 642.6,
+      "diffuse_radiation_wm2": 130.7
+    },
+    {
+      "timestamp": "2026-10-12T12:00",
+      "temperature_celsius": -5.6,
+      "wind_speed_ms": 7.38,
+      "wind_direction_deg": 115.0,
+      "solar_radiation_wm2": 283.0,
+      "direct_radiation_wm2": 520.6,
+      "diffuse_radiation_wm2": 117.7
+    },
+    {
+      "timestamp": "2026-10-12T13:00",
+      "temperature_celsius": -5.8,
+      "wind_speed_ms": 6.72,
+      "wind_direction_deg": 113.0,
+      "solar_radiation_wm2": 179.0,
+      "direct_radiation_wm2": 373.5,
+      "diffuse_radiation_wm2": 94.0
+    },
+    {
+      "timestamp": "2026-10-12T14:00",
+      "temperature_celsius": -6.0,
+      "wind_speed_ms": 6.04,
+      "wind_direction_deg": 109.0,
+      "solar_radiation_wm2": 93.0,
+      "direct_radiation_wm2": 260.6,
+      "diffuse_radiation_wm2": 59.1
+    },
+    {
+      "timestamp": "2026-10-12T15:00",
+      "temperature_celsius": -6.3,
+      "wind_speed_ms": 5.22,
+      "wind_direction_deg": 107.0,
+      "solar_radiation_wm2": 23.0,
+      "direct_radiation_wm2": 89.7,
+      "diffuse_radiation_wm2": 18.3
+    },
+    {
+      "timestamp": "2026-10-12T16:00",
+      "temperature_celsius": -6.4,
+      "wind_speed_ms": 3.98,
+      "wind_direction_deg": 108.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
       "timestamp": "2026-10-12T17:00",
-      "temperature_celsius": -6.9,
-      "wind_speed_ms": 3.0,
-      "wind_direction_deg": 92.0,
+      "temperature_celsius": -6.6,
+      "wind_speed_ms": 2.73,
+      "wind_direction_deg": 114.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-12T18:00",
-      "temperature_celsius": -7.1,
-      "wind_speed_ms": 2.15,
-      "wind_direction_deg": 68.0,
+      "temperature_celsius": -6.7,
+      "wind_speed_ms": 1.66,
+      "wind_direction_deg": 123.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-12T19:00",
-      "temperature_celsius": -7.2,
-      "wind_speed_ms": 1.39,
-      "wind_direction_deg": 30.0,
+      "temperature_celsius": -6.9,
+      "wind_speed_ms": 1.0,
+      "wind_direction_deg": 127.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-12T20:00",
-      "temperature_celsius": -7.2,
-      "wind_speed_ms": 1.39,
-      "wind_direction_deg": 339.0,
+      "temperature_celsius": -7.0,
+      "wind_speed_ms": 0.57,
+      "wind_direction_deg": 135.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-12T21:00",
-      "temperature_celsius": -7.4,
-      "wind_speed_ms": 1.49,
-      "wind_direction_deg": 318.0,
+      "temperature_celsius": -7.3,
+      "wind_speed_ms": 0.67,
+      "wind_direction_deg": 117.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
@@ -645,169 +429,169 @@
     {
       "timestamp": "2026-10-12T22:00",
       "temperature_celsius": -7.9,
-      "wind_speed_ms": 0.61,
-      "wind_direction_deg": 351.0,
+      "wind_speed_ms": 1.75,
+      "wind_direction_deg": 114.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-12T23:00",
-      "temperature_celsius": -8.6,
-      "wind_speed_ms": 1.5,
-      "wind_direction_deg": 94.0,
+      "temperature_celsius": -8.5,
+      "wind_speed_ms": 3.32,
+      "wind_direction_deg": 111.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-13T00:00",
-      "temperature_celsius": -9.1,
-      "wind_speed_ms": 2.89,
-      "wind_direction_deg": 104.0,
+      "temperature_celsius": -9.0,
+      "wind_speed_ms": 4.53,
+      "wind_direction_deg": 112.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-13T01:00",
-      "temperature_celsius": -9.3,
-      "wind_speed_ms": 3.51,
-      "wind_direction_deg": 110.0,
-      "solar_radiation_wm2": 17.0,
-      "direct_radiation_wm2": 53.3,
-      "diffuse_radiation_wm2": 14.2
+      "temperature_celsius": -9.2,
+      "wind_speed_ms": 4.92,
+      "wind_direction_deg": 114.0,
+      "solar_radiation_wm2": 18.0,
+      "direct_radiation_wm2": 63.6,
+      "diffuse_radiation_wm2": 14.7
     },
     {
       "timestamp": "2026-10-13T02:00",
-      "temperature_celsius": -9.4,
-      "wind_speed_ms": 3.76,
-      "wind_direction_deg": 115.0,
-      "solar_radiation_wm2": 92.0,
-      "direct_radiation_wm2": 317.4,
-      "diffuse_radiation_wm2": 55.5
+      "temperature_celsius": -9.3,
+      "wind_speed_ms": 5.01,
+      "wind_direction_deg": 116.0,
+      "solar_radiation_wm2": 94.0,
+      "direct_radiation_wm2": 330.3,
+      "diffuse_radiation_wm2": 56.0
     },
     {
       "timestamp": "2026-10-13T03:00",
-      "temperature_celsius": -9.2,
-      "wind_speed_ms": 3.85,
-      "wind_direction_deg": 118.0,
-      "solar_radiation_wm2": 186.0,
-      "direct_radiation_wm2": 441.9,
-      "diffuse_radiation_wm2": 91.6
+      "temperature_celsius": -9.1,
+      "wind_speed_ms": 4.83,
+      "wind_direction_deg": 117.0,
+      "solar_radiation_wm2": 189.0,
+      "direct_radiation_wm2": 453.8,
+      "diffuse_radiation_wm2": 92.1
     },
     {
       "timestamp": "2026-10-13T04:00",
       "temperature_celsius": -8.7,
-      "wind_speed_ms": 3.72,
+      "wind_speed_ms": 4.48,
       "wind_direction_deg": 114.0,
-      "solar_radiation_wm2": 295.0,
-      "direct_radiation_wm2": 582.9,
-      "diffuse_radiation_wm2": 116.7
+      "solar_radiation_wm2": 299.0,
+      "direct_radiation_wm2": 593.9,
+      "diffuse_radiation_wm2": 117.3
     },
     {
       "timestamp": "2026-10-13T05:00",
-      "temperature_celsius": -8.0,
-      "wind_speed_ms": 3.54,
+      "temperature_celsius": -8.2,
+      "wind_speed_ms": 3.96,
       "wind_direction_deg": 106.0,
-      "solar_radiation_wm2": 401.0,
-      "direct_radiation_wm2": 697.3,
-      "diffuse_radiation_wm2": 132.0
+      "solar_radiation_wm2": 405.0,
+      "direct_radiation_wm2": 705.5,
+      "diffuse_radiation_wm2": 132.8
     },
     {
       "timestamp": "2026-10-13T06:00",
-      "temperature_celsius": -7.5,
-      "wind_speed_ms": 3.34,
-      "wind_direction_deg": 99.0,
-      "solar_radiation_wm2": 484.0,
-      "direct_radiation_wm2": 768.7,
-      "diffuse_radiation_wm2": 139.7
+      "temperature_celsius": -7.7,
+      "wind_speed_ms": 3.52,
+      "wind_direction_deg": 97.0,
+      "solar_radiation_wm2": 488.0,
+      "direct_radiation_wm2": 775.6,
+      "diffuse_radiation_wm2": 140.6
     },
     {
       "timestamp": "2026-10-13T07:00",
-      "temperature_celsius": -7.2,
-      "wind_speed_ms": 3.4,
-      "wind_direction_deg": 90.0,
-      "solar_radiation_wm2": 539.0,
-      "direct_radiation_wm2": 810.7,
-      "diffuse_radiation_wm2": 143.3
+      "temperature_celsius": -7.4,
+      "wind_speed_ms": 3.41,
+      "wind_direction_deg": 87.0,
+      "solar_radiation_wm2": 543.0,
+      "direct_radiation_wm2": 817.0,
+      "diffuse_radiation_wm2": 144.3
     },
     {
       "timestamp": "2026-10-13T08:00",
-      "temperature_celsius": -7.0,
-      "wind_speed_ms": 3.42,
-      "wind_direction_deg": 83.0,
-      "solar_radiation_wm2": 562.0,
-      "direct_radiation_wm2": 828.5,
-      "diffuse_radiation_wm2": 144.9
+      "temperature_celsius": -7.1,
+      "wind_speed_ms": 3.47,
+      "wind_direction_deg": 78.0,
+      "solar_radiation_wm2": 565.0,
+      "direct_radiation_wm2": 833.0,
+      "diffuse_radiation_wm2": 145.6
     },
     {
       "timestamp": "2026-10-13T09:00",
-      "temperature_celsius": -6.9,
-      "wind_speed_ms": 3.28,
-      "wind_direction_deg": 78.0,
-      "solar_radiation_wm2": 552.0,
-      "direct_radiation_wm2": 825.1,
-      "diffuse_radiation_wm2": 145.2
+      "temperature_celsius": -7.0,
+      "wind_speed_ms": 3.35,
+      "wind_direction_deg": 73.0,
+      "solar_radiation_wm2": 553.0,
+      "direct_radiation_wm2": 826.5,
+      "diffuse_radiation_wm2": 145.4
     },
     {
       "timestamp": "2026-10-13T10:00",
-      "temperature_celsius": -6.8,
-      "wind_speed_ms": 2.44,
-      "wind_direction_deg": 71.0,
-      "solar_radiation_wm2": 508.0,
-      "direct_radiation_wm2": 796.7,
-      "diffuse_radiation_wm2": 143.4
+      "temperature_celsius": -7.0,
+      "wind_speed_ms": 2.64,
+      "wind_direction_deg": 65.0,
+      "solar_radiation_wm2": 507.0,
+      "direct_radiation_wm2": 795.2,
+      "diffuse_radiation_wm2": 143.1
     },
     {
       "timestamp": "2026-10-13T11:00",
-      "temperature_celsius": -6.9,
-      "wind_speed_ms": 1.22,
-      "wind_direction_deg": 55.0,
-      "solar_radiation_wm2": 433.0,
-      "direct_radiation_wm2": 739.6,
-      "diffuse_radiation_wm2": 137.4
+      "temperature_celsius": -7.0,
+      "wind_speed_ms": 1.72,
+      "wind_direction_deg": 54.0,
+      "solar_radiation_wm2": 431.0,
+      "direct_radiation_wm2": 736.1,
+      "diffuse_radiation_wm2": 136.8
     },
     {
       "timestamp": "2026-10-13T12:00",
-      "temperature_celsius": -7.2,
-      "wind_speed_ms": 0.5,
-      "wind_direction_deg": 53.0,
-      "solar_radiation_wm2": 332.0,
-      "direct_radiation_wm2": 645.2,
-      "diffuse_radiation_wm2": 123.6
+      "temperature_celsius": -7.3,
+      "wind_speed_ms": 1.08,
+      "wind_direction_deg": 56.0,
+      "solar_radiation_wm2": 331.0,
+      "direct_radiation_wm2": 642.9,
+      "diffuse_radiation_wm2": 123.3
     },
     {
       "timestamp": "2026-10-13T13:00",
-      "temperature_celsius": -7.9,
-      "wind_speed_ms": 1.12,
-      "wind_direction_deg": 117.0,
+      "temperature_celsius": -8.0,
+      "wind_speed_ms": 1.33,
+      "wind_direction_deg": 103.0,
       "solar_radiation_wm2": 223.0,
       "direct_radiation_wm2": 525.0,
       "diffuse_radiation_wm2": 100.7
     },
     {
       "timestamp": "2026-10-13T14:00",
-      "temperature_celsius": -9.0,
-      "wind_speed_ms": 2.8,
-      "wind_direction_deg": 125.0,
+      "temperature_celsius": -9.1,
+      "wind_speed_ms": 2.52,
+      "wind_direction_deg": 124.0,
       "solar_radiation_wm2": 123.0,
       "direct_radiation_wm2": 409.6,
       "diffuse_radiation_wm2": 67.4
     },
     {
       "timestamp": "2026-10-13T15:00",
-      "temperature_celsius": -9.8,
-      "wind_speed_ms": 4.08,
-      "wind_direction_deg": 126.0,
+      "temperature_celsius": -10.0,
+      "wind_speed_ms": 3.56,
+      "wind_direction_deg": 128.0,
       "solar_radiation_wm2": 34.0,
       "direct_radiation_wm2": 211.5,
       "diffuse_radiation_wm2": 22.9
     },
     {
       "timestamp": "2026-10-13T16:00",
-      "temperature_celsius": -10.4,
-      "wind_speed_ms": 4.6,
+      "temperature_celsius": -10.5,
+      "wind_speed_ms": 3.97,
       "wind_direction_deg": 124.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
@@ -815,35 +599,35 @@
     },
     {
       "timestamp": "2026-10-13T17:00",
-      "temperature_celsius": -10.7,
-      "wind_speed_ms": 4.85,
-      "wind_direction_deg": 122.0,
+      "temperature_celsius": -10.9,
+      "wind_speed_ms": 3.98,
+      "wind_direction_deg": 115.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-13T18:00",
-      "temperature_celsius": -11.1,
-      "wind_speed_ms": 4.84,
-      "wind_direction_deg": 120.0,
+      "temperature_celsius": -11.3,
+      "wind_speed_ms": 4.05,
+      "wind_direction_deg": 110.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-13T19:00",
-      "temperature_celsius": -11.4,
-      "wind_speed_ms": 4.61,
-      "wind_direction_deg": 117.0,
+      "temperature_celsius": -11.7,
+      "wind_speed_ms": 3.96,
+      "wind_direction_deg": 111.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-13T20:00",
-      "temperature_celsius": -11.6,
-      "wind_speed_ms": 4.25,
+      "temperature_celsius": -12.1,
+      "wind_speed_ms": 3.62,
       "wind_direction_deg": 114.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
@@ -851,27 +635,243 @@
     },
     {
       "timestamp": "2026-10-13T21:00",
-      "temperature_celsius": -11.9,
-      "wind_speed_ms": 3.9,
-      "wind_direction_deg": 113.0,
+      "temperature_celsius": -12.4,
+      "wind_speed_ms": 3.45,
+      "wind_direction_deg": 120.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-13T22:00",
-      "temperature_celsius": -12.3,
-      "wind_speed_ms": 3.76,
-      "wind_direction_deg": 115.0,
+      "temperature_celsius": -12.8,
+      "wind_speed_ms": 3.38,
+      "wind_direction_deg": 124.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
     },
     {
       "timestamp": "2026-10-13T23:00",
-      "temperature_celsius": -12.7,
-      "wind_speed_ms": 3.58,
-      "wind_direction_deg": 120.0,
+      "temperature_celsius": -13.1,
+      "wind_speed_ms": 3.41,
+      "wind_direction_deg": 130.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-14T00:00",
+      "temperature_celsius": -13.2,
+      "wind_speed_ms": 3.32,
+      "wind_direction_deg": 134.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-14T01:00",
+      "temperature_celsius": -13.1,
+      "wind_speed_ms": 3.11,
+      "wind_direction_deg": 132.0,
+      "solar_radiation_wm2": 24.0,
+      "direct_radiation_wm2": 120.2,
+      "diffuse_radiation_wm2": 17.7
+    },
+    {
+      "timestamp": "2026-10-14T02:00",
+      "temperature_celsius": -12.9,
+      "wind_speed_ms": 2.92,
+      "wind_direction_deg": 128.0,
+      "solar_radiation_wm2": 110.0,
+      "direct_radiation_wm2": 396.3,
+      "diffuse_radiation_wm2": 61.9
+    },
+    {
+      "timestamp": "2026-10-14T03:00",
+      "temperature_celsius": -12.4,
+      "wind_speed_ms": 2.69,
+      "wind_direction_deg": 121.0,
+      "solar_radiation_wm2": 211.0,
+      "direct_radiation_wm2": 516.5,
+      "diffuse_radiation_wm2": 97.5
+    },
+    {
+      "timestamp": "2026-10-14T04:00",
+      "temperature_celsius": -11.8,
+      "wind_speed_ms": 2.42,
+      "wind_direction_deg": 114.0,
+      "solar_radiation_wm2": 323.0,
+      "direct_radiation_wm2": 641.9,
+      "diffuse_radiation_wm2": 122.7
+    },
+    {
+      "timestamp": "2026-10-14T05:00",
+      "temperature_celsius": -10.9,
+      "wind_speed_ms": 2.06,
+      "wind_direction_deg": 104.0,
+      "solar_radiation_wm2": 429.0,
+      "direct_radiation_wm2": 741.5,
+      "diffuse_radiation_wm2": 138.5
+    },
+    {
+      "timestamp": "2026-10-14T06:00",
+      "temperature_celsius": -10.2,
+      "wind_speed_ms": 2.01,
+      "wind_direction_deg": 96.0,
+      "solar_radiation_wm2": 511.0,
+      "direct_radiation_wm2": 804.8,
+      "diffuse_radiation_wm2": 145.8
+    },
+    {
+      "timestamp": "2026-10-14T07:00",
+      "temperature_celsius": -9.7,
+      "wind_speed_ms": 2.21,
+      "wind_direction_deg": 95.0,
+      "solar_radiation_wm2": 562.0,
+      "direct_radiation_wm2": 838.4,
+      "diffuse_radiation_wm2": 148.0
+    },
+    {
+      "timestamp": "2026-10-14T08:00",
+      "temperature_celsius": -9.2,
+      "wind_speed_ms": 2.52,
+      "wind_direction_deg": 97.0,
+      "solar_radiation_wm2": 582.0,
+      "direct_radiation_wm2": 851.1,
+      "diffuse_radiation_wm2": 148.7
+    },
+    {
+      "timestamp": "2026-10-14T09:00",
+      "temperature_celsius": -8.9,
+      "wind_speed_ms": 2.73,
+      "wind_direction_deg": 98.0,
+      "solar_radiation_wm2": 567.0,
+      "direct_radiation_wm2": 840.8,
+      "diffuse_radiation_wm2": 147.8
+    },
+    {
+      "timestamp": "2026-10-14T10:00",
+      "temperature_celsius": -8.7,
+      "wind_speed_ms": 2.81,
+      "wind_direction_deg": 94.0,
+      "solar_radiation_wm2": 520.0,
+      "direct_radiation_wm2": 808.9,
+      "diffuse_radiation_wm2": 145.4
+    },
+    {
+      "timestamp": "2026-10-14T11:00",
+      "temperature_celsius": -8.7,
+      "wind_speed_ms": 2.71,
+      "wind_direction_deg": 86.0,
+      "solar_radiation_wm2": 444.0,
+      "direct_radiation_wm2": 751.9,
+      "diffuse_radiation_wm2": 139.4
+    },
+    {
+      "timestamp": "2026-10-14T12:00",
+      "temperature_celsius": -9.1,
+      "wind_speed_ms": 2.71,
+      "wind_direction_deg": 86.0,
+      "solar_radiation_wm2": 342.0,
+      "direct_radiation_wm2": 658.7,
+      "diffuse_radiation_wm2": 125.7
+    },
+    {
+      "timestamp": "2026-10-14T13:00",
+      "temperature_celsius": -10.0,
+      "wind_speed_ms": 2.62,
+      "wind_direction_deg": 97.0,
+      "solar_radiation_wm2": 232.0,
+      "direct_radiation_wm2": 540.7,
+      "diffuse_radiation_wm2": 103.1
+    },
+    {
+      "timestamp": "2026-10-14T14:00",
+      "temperature_celsius": -11.3,
+      "wind_speed_ms": 2.73,
+      "wind_direction_deg": 114.0,
+      "solar_radiation_wm2": 131.0,
+      "direct_radiation_wm2": 427.6,
+      "diffuse_radiation_wm2": 70.6
+    },
+    {
+      "timestamp": "2026-10-14T15:00",
+      "temperature_celsius": -12.5,
+      "wind_speed_ms": 3.0,
+      "wind_direction_deg": 127.0,
+      "solar_radiation_wm2": 40.0,
+      "direct_radiation_wm2": 255.2,
+      "diffuse_radiation_wm2": 25.9
+    },
+    {
+      "timestamp": "2026-10-14T16:00",
+      "temperature_celsius": -13.3,
+      "wind_speed_ms": 3.33,
+      "wind_direction_deg": 131.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-14T17:00",
+      "temperature_celsius": -14.0,
+      "wind_speed_ms": 3.54,
+      "wind_direction_deg": 133.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-14T18:00",
+      "temperature_celsius": -14.5,
+      "wind_speed_ms": 3.68,
+      "wind_direction_deg": 133.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-14T19:00",
+      "temperature_celsius": -14.8,
+      "wind_speed_ms": 3.68,
+      "wind_direction_deg": 133.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-14T20:00",
+      "temperature_celsius": -14.9,
+      "wind_speed_ms": 3.61,
+      "wind_direction_deg": 132.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-14T21:00",
+      "temperature_celsius": -15.0,
+      "wind_speed_ms": 3.62,
+      "wind_direction_deg": 129.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-14T22:00",
+      "temperature_celsius": -15.0,
+      "wind_speed_ms": 3.72,
+      "wind_direction_deg": 126.0,
+      "solar_radiation_wm2": 0.0,
+      "direct_radiation_wm2": 0.0,
+      "diffuse_radiation_wm2": 0.0
+    },
+    {
+      "timestamp": "2026-10-14T23:00",
+      "temperature_celsius": -15.0,
+      "wind_speed_ms": 3.83,
+      "wind_direction_deg": 123.0,
       "solar_radiation_wm2": 0.0,
       "direct_radiation_wm2": 0.0,
       "diffuse_radiation_wm2": 0.0
